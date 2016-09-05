@@ -1,0 +1,199 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.school._id ? 'Edit School' : 'New School'}}</h1>
+  </div>
+  <div class="col-md-12">
+    <!-- Nav tabs -->
+    <ul class="nav nav-pills" role="tablist">
+      <li role="presentation" class="active"><a href="#generaldetails" aria-controls="generaldetails" role="tab" data-toggle="tab">General Details</a></li>
+      <li role="presentation"><a href="#schoolcalendar" aria-controls="schoolcalendar" role="tab" data-toggle="tab">Calendar</a></li>
+      <li role="presentation"><a href="#teachers" aria-controls="teachers" role="tab" data-toggle="tab">Teachers</a></li>
+      <li role="presentation"><a href="#classes" aria-controls="classes" role="tab" data-toggle="tab">Classes</a></li>
+        <li role="presentation"><a href="#students" aria-controls="students" role="tab" data-toggle="tab">Students</a></li>
+        <li role="presentation"><a href="#schoolsubjects" aria-controls="schoolsubjects" role="tab" data-toggle="tab">Subjects</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="generaldetails">
+
+    <form name="vm.form.schoolForm" class="form-horizontal" ng-submit="vm.save(vm.form.schoolForm.$valid)" novalidate>
+      <fieldset>
+
+
+        <div>
+
+
+              <div class="form-group" show-errors>
+                <label class="control-label" for="name">Name</label>
+                <input name="name" type="text" ng-model="vm.school.name" id="name" class="form-control" placeholder="Name" required>
+                <div ng-messages="vm.form.schoolForm.name.$error" role="alert">
+                  <p class="help-block error-text" ng-message="required">School name is required.</p>
+                </div>
+              </div>
+
+              <div class="form-group" show-errors>
+                <label class="control-label" for="name">Address</label>
+                <input name="address" type="text" ng-model="vm.school.address" id="address" class="form-control" placeholder="address" required>
+                <div ng-messages="vm.form.schoolForm.address.$error" role="alert">
+                  <p class="help-block error-text" ng-message="required">School address is required.</p>
+                </div>
+              </div>
+
+              <div class="form-group" show-errors>
+          <label class="control-label" for="name">logo</label>
+          <input name="logo" type="text" ng-model="vm.school.logo" id="logo" class="form-control" placeholder="logo" required>
+          <div ng-messages="vm.form.schoolForm.logo.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">School logo is required.</p>
+          </div>
+        </div>
+
+
+
+
+        </div>
+
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-default">{{vm.school._id ? 'Update' : 'Create'}}</button>
+        </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+    </fieldset>
+    </form>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="schoolcalendar">School Calendar</div>
+  <div role="tabpanel" class="tab-pane" id="teachers">Teachers <button class="btn btn-primary" ng-click="vm.create('lg');">Add New</button>
+        
+              <div>
+        <table st-table="rowCollection" class="table table-striped">
+	<thead>
+	<tr>
+		<th>first name</th>
+		<th>last name</th>
+		<th>Age</th>
+		<th>Actions</th>
+		
+	</tr>
+	</thead>
+	<tbody>
+	<tr ng-repeat="row in vm.school.teachers">
+		<td>{{row.name}}</td>
+		<td>{{row.lastname}}</td>
+		<td>{{row.age}}</td>
+		<td>
+           
+            <button class="btn btn-primary" ng-click="vm.teacher=row;vm.open('lg', row);">View</button><button style="padding-right:10px;" class="btn btn-danger" ng-click="vm.teacher=row;vm.confirmdelete('md',row);">Delete</button>
+               </td>		
+	</tr>
+	</tbody>
+</table>
+        
+        </div>
+        
+       </div>
+
+  <div role="tabpanel" class="tab-pane" id="classes">
+
+     Classes:{{vm.school.schoolclasses ? vm.school.schoolclasses.length : 0}} <button class="btn btn-primary" ng-click="vm.createSchoolClass('lg');">Add New</button> 
+                  <div>
+        <table st-table="rowCollection" class="table table-striped">
+	<thead>
+	<tr>
+		<th>Name</th>
+		<th>Grade Name</th>
+		<th>Subject</th>
+		<th>Actions</th>
+		
+	</tr>
+	</thead>
+	<tbody>
+	<tr ng-repeat="row in vm.school.schoolclasses">
+		<td>{{row.name}}</td>
+		<td>{{row.gradename}}</td>
+		<td>{{row.subject}}</td>
+		<td>
+           
+            <button class="btn btn-primary" ng-click="vm.schoolclass=row;vm.openSchoolClassModal('lg', row);">View</button><button style="padding-right:10px;" class="btn btn-danger" ng-click="vm.schoolclass=row;vm.confirmDeleteSchoolClass('md',row);">Delete</button>
+               </td>		
+	</tr>
+	</tbody>
+</table>
+        
+        </div>
+
+  </div>
+  <div role="tabpanel" class="tab-pane" id="students">
+      Students {{vm.school.schoolclasses ? vm.school.schoolclasses.length : 0}} <button class="btn btn-primary" ng-click="vm.createStudent('lg');">Add New</button> 
+      
+      <div>
+        <table st-table="rowCollection" class="table table-striped">
+	<thead>
+	<tr>
+		<th>Name</th>
+		<th>Surname</th>
+		<th>Student Number</th>
+		<th>Actions</th>
+		
+	</tr>
+	</thead>
+	<tbody>
+	<tr ng-repeat="row in vm.school.students">
+		<td>{{row.name}}</td>
+		<td>{{row.surname}}</td>
+		<td>{{row.studentnumber}}</td>
+		<td>
+           
+            <button class="btn btn-primary" ng-click="vm.student=row;vm.openStudentModal('lg', row);">View</button><button style="padding-right:10px;" class="btn btn-danger" ng-click="vm.student=row;vm.confirmDeleteStudent('md',row);">Delete</button>
+               </td>		
+	</tr>
+	</tbody>
+</table>
+        
+        </div>
+
+      
+      
+      
+        </div>
+ <div role="tabpanel" class="tab-pane" id="schoolsubjects">
+     Subjects {{vm.school.subjects ? vm.school.subjects.length : 0}} <button class="btn btn-primary" ng-click="vm.createSubject('lg');">Add New</button> 
+      
+      <div>
+        <table st-table="rowCollection" class="table table-striped">
+	<thead>
+	<tr>
+		<th>Name</th>
+		<th>Level</th>
+		
+		<th>Actions</th>
+		
+	</tr>
+	</thead>
+	<tbody>
+	<tr ng-repeat="row in vm.school.subjects">
+		<td>{{row.name}}</td>
+		<td>{{row.level}}</td>
+		
+		<td>
+           
+            <button class="btn btn-primary" ng-click="vm.subject=row;vm.openSubjectModal('lg', row);">View</button><button style="padding-right:10px;" class="btn btn-danger" ng-click="vm.student=row;vm.confirmDeleteSsubject('md',row);">Delete</button>
+               </td>		
+	</tr>
+	</tbody>
+</table>
+        
+        </div>
+        
+        
+        
+        
+        </div>
+  </div>
+    <div>
+
+
+
+  </div>
+</section>

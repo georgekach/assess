@@ -1,0 +1,60 @@
+ <div class="modal-header">
+            <h3 class="modal-title" id="modal-title"> {{vm.student._id ? 'Update': 'New '}} Student Details</h3>
+        </div>
+            <div class="modal-body" id="modal-body">
+                <!--<ul>
+                    <li ng-repeat="item in vm.items">
+                        <a href="#" ng-click="$event.preventDefault(); vm.selected.item = item">{{ item }}</a>
+                    </li>
+                </ul>
+                Selected: <b>{{ vm.selected.item }}</b>-->
+                <div class="container">
+
+                    <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2"> Name</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="vm.student.name" id="name" placeholder="Name" /></div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2"> Surname</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="vm.student.surname" id="surname" placeholder="surname" /></div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2"> Home Address</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="vm.student.homeaddress" id="homeaddress" placeholder="homeaddress" /></div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2"> Student Number</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="vm.student.studentnumber" id="studentnumber" placeholder="studentnumber" /></div>
+                    </div>
+
+                    <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2"> Gender</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="vm.student.gender" id="gender" placeholder="gender" /></div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2"> picture</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="vm.student.c" id="picture" placeholder="picture" /></div>
+                    </div>
+                     <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2"> Current Class</label>
+                        <div class="col-md-4">
+                            <!--<input class="form-control" type="text" ng-model="vm.student.class" id="picture" placeholder="picture" />-->
+                         <select class="form-control" name="singleSelect" id="currentclass" ng-model="vm.student.currentclass" ng-options="class.name for class in vm.school.schoolclasses track by class._id">
+      <!--<option ng-repeat="option in vm.school.schoolclasses" ng-value="option._id">{{option.name}}</option>-->
+    </select>
+                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                
+                <button class="btn btn-primary" type="button" ng-click="vm.save()">{{vm.student._id ? 'Update': 'Save'}}</button>
+                <!--<button class="btn btn-primary" type="button" ng-click="vm.ok()">OK</button>-->
+                <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancel</button>
+            </div>

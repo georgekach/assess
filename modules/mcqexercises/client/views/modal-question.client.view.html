@@ -1,0 +1,82 @@
+ <div class="modal-header">
+            <h3 class="modal-title" id="modal-title"> {{vm.question._id ? 'Update': 'New '}} Question Details</h3>
+        </div>
+            <div class="modal-body" id="modal-body">
+                <!--<ul>
+                    <li ng-repeat="item in vm.items">
+                        <a href="#" ng-click="$event.preventDefault(); vm.selected.item = item">{{ item }}</a>
+                    </li>
+                </ul>
+                Selected: <b>{{ vm.selected.item }}</b>-->
+                <div class="container">
+
+                    <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2"> Number</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="vm.question.questionnumber" id="questionnumber" placeholder="questionnumber" /></div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2"> Question</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="vm.question.questiontext" id="questiontext" placeholder="questiontext" /></div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                       
+                        <div class="col-md-8">
+                        <form editable-form name="tableform" onaftersave="saveTable()" oncancel="cancel()">
+
+    <!-- table -->
+    <table class="table table-bordered table-hover table-condensed">
+      <tr style="font-weight: bold">
+        <td >Letter</td>
+        <td >Answer</td>
+        <td >Action</td>        
+      </tr>
+      <tr ng-repeat="answer in vm.question.possibleanswers ">
+        <td>
+          <!-- editable username (text with validation) -->
+          <span editable-text="answer.choiceletter" e-form="tableform" >
+            {{ answer.choiceletter || 'empty' }}
+          </span>
+        </td>
+        <td>
+          <!-- editable status (select-local) -->
+          <span editable-text="answer.answertext" e-form="tableform" >
+            {{ answer.answertext || 'empty'}}
+          </span>
+        </td>
+        
+        <td><button type="button" ng-show="tableform.$visible" ng-click="deleteAnswer(answer.id)" class="btn btn-danger pull-right">Delete</button></td>
+      </tr>
+    </table>
+
+    <!-- buttons -->
+    <div class="btn-edit">
+      <button type="button" class="btn btn-default" ng-show="!tableform.$visible" ng-click="tableform.$show()">
+        edit
+      </button>
+    </div>
+    <div class="btn-form" ng-show="tableform.$visible">
+      <button type="button" ng-disabled="tableform.$waiting" ng-click="vm.addAnswer()" class="btn btn-default pull-right">add row</button>
+      <button type="submit" ng-disabled="tableform.$waiting" class="btn btn-primary">save</button>
+      <button type="button" ng-disabled="tableform.$waiting" ng-click="tableform.$cancel()" class="btn btn-default">cancel</button>
+    </div> 
+    
+  </form>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2">answers</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="vm.question.answers" id="answers" placeholder="answers" /></div>
+                    </div>         
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                
+                <button class="btn btn-primary" type="button" ng-click="vm.save()">{{vm.question._id ? 'Update': 'Save'}}</button>
+                <!--<button class="btn btn-primary" type="button" ng-click="vm.ok()">OK</button>-->
+                <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancel</button>
+            </div>

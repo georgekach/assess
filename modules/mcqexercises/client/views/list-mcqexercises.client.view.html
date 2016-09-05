@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>Mcqexercises</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="mcqexercise in vm.mcqexercises"
+       ui-sref="mcqexercises.view({ mcqexerciseId: mcqexercise._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="mcqexercise.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="mcqexercise.user" ng-bind="mcqexercise.user.displayName"></span>
+        <span ng-if="!mcqexercise.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="mcqexercise.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.mcqexercises.$resolved && !vm.mcqexercises.length">
+    No Mcqexercises yet, why don't you <a ui-sref="mcqexercises.create">create one</a>?
+  </div>
+</section>

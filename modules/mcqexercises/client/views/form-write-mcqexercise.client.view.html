@@ -1,0 +1,15 @@
+<section>
+<h1 class="page-header">
+    Writing Exercise {{vm.mcqexercise.titlw}}
+    </h1>
+    <ul>
+        <li ng-repeat="question in vm.mcqexercise.questions">{{question.questionnumber}}
+        {{question.questiontext}}
+            <ul>
+                <li ng-repeat="possibleanswer in question.possibleanswers">
+                <input type="checkbox"/> {{possibleanswer.choiceletter}} {{possibleanswer.answertext}}
+                </li>
+            </ul>
+        </li>
+    </ul>
+</section>

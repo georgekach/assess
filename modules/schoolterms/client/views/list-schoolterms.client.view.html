@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>Schoolterms</h1>
+  </div>
+  <div class="list-group">
+    <a data-ng-repeat="schoolterm in vm.schoolterms"
+       data-ui-sref="schoolterms.view({ schooltermId: schoolterm._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span data-ng-bind="schoolterm.created | date:'mediumDate'"></span>
+        by
+        <span data-ng-if="schoolterm.user" data-ng-bind="schoolterm.user.displayName"></span>
+        <span data-ng-if="!schoolterm.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" data-ng-bind="schoolterm.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="vm.schoolterms.$resolved && !vm.schoolterms.length">
+    No Schoolterms yet, why don't you <a data-ui-sref="schoolterms.create">create one</a>?
+  </div>
+</section>

@@ -1,0 +1,55 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.schoolclass._id ? 'Edit Schoolclass' : 'New Schoolclass'}}</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.schoolclassForm" class="form-horizontal" ng-submit="vm.save(vm.form.schoolclassForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="name">Name</label>
+          <input name="name" type="text" ng-model="vm.schoolclass.name" id="name" class="form-control" placeholder="Name" required>
+          <div ng-messages="vm.form.schoolclassForm.name.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Schoolclass name is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="gradename">Grade Name</label>
+          <input name="gradename" type="text" ng-model="vm.schoolclass.gradename" id="gradename" class="form-control" placeholder="Grade Name" required>
+          <div ng-messages="vm.form.schoolclassForm.gradename.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Schoolclass gradename is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="subject">Subject</label>
+          <input name="subject" type="text" ng-model="vm.schoolclass.subject" id="subject" class="form-control" placeholder="Subject Name" required>
+          <div ng-messages="vm.form.schoolclassForm.subject.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Schoolclass Subject is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label class="control-label" for="year">Year</label>
+          <input name="year" type="text" ng-model="vm.schoolclass.year" id="year" class="form-control" placeholder="Subject Name" required>
+          <div ng-messages="vm.form.schoolclassForm.year.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Schoolclass Year is required.</p>
+          </div>
+        </div>
+<!--
+        <div class="form-group" show-errors>
+          <label class="control-label" for="nextclass">Next Class</label>
+          <input name="nextclass" type="text" ng-model="vm.schoolclass.nextclass" id="nextclass" class="form-control" placeholder="Subject Name" required>
+          <div ng-messages="vm.form.schoolclassForm.nextclass.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Schoolclass Next Class is required.</p>
+          </div>
+        </div>-->
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-default">{{vm.schoolclass._id ? 'Update' : 'Create'}}</button>
+        </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,45 @@
+ <div class="modal-header">
+            <h3 class="modal-title" id="modal-title"> {{vm.teacher._id ? 'Update': 'New '}} Teacher Details</h3>
+        </div>
+            <div class="modal-body" id="modal-body">
+             
+                <div class="container">
+   <ul class="nav nav-pills" role="tablist">
+      <li role="presentation" class="active"><a href="#teacherGeneraldetails" aria-controls="teacherGeneraldetails" role="tab" data-toggle="tab">General Details</a></li>
+      <li role="presentation"><a href="#teacherClasses" aria-controls="teacherClasses" role="tab" data-toggle="tab">Classes</a></li>
+    </ul>
+                    
+                    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="teacherGeneraldetails">
+                    
+                    <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2"> Name</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="vm.teacher.name" id="name" placeholder="Name" /></div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2"> Last Name</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="vm.teacher.lastname" id="lastname" placeholder="last Name" /></div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2"> Age</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="vm.teacher.age" id="age" placeholder="Age" /></div>
+                    </div>
+
+                        </div>
+                        
+                        <div role="tabpanel" class="tab-pane active" id="teacherClasses">
+                           Teachers Classes 
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                
+                <button class="btn btn-primary" type="button" ng-click="vm.save()">{{vm.teacher._id ? 'Update': 'Save'}}</button>
+                <!--<button class="btn btn-primary" type="button" ng-click="vm.ok()">OK</button>-->
+                <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancel</button>
+            </div>

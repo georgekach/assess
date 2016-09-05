@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>Classregisters</h1>
+  </div>
+  <div class="list-group">
+    <a data-ng-repeat="classregister in vm.classregisters"
+       data-ui-sref="classregisters.view({ classregisterId: classregister._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span data-ng-bind="classregister.created | date:'mediumDate'"></span>
+        by
+        <span data-ng-if="classregister.user" data-ng-bind="classregister.user.displayName"></span>
+        <span data-ng-if="!classregister.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" data-ng-bind="classregister.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="vm.classregisters.$resolved && !vm.classregisters.length">
+    No Classregisters yet, why don't you <a data-ui-sref="classregisters.create">create one</a>?
+  </div>
+</section>

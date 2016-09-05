@@ -1,0 +1,48 @@
+<section>
+  <div class="page-header">
+    <h1>Guardians</h1>
+  </div>
+    
+  <div class="list-group">
+    <a data-ng-repeat="guardian in vm.guardians"
+       data-ui-sref="guardians.view({ guardianId: guardian._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span data-ng-bind="guardian.created | date:'mediumDate'"></span>
+        by
+        <span data-ng-if="guardian.user" data-ng-bind="guardian.user.displayName"></span>
+        <span data-ng-if="!guardian.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" data-ng-bind="guardian.name"></h4>
+    </a>
+  </div>
+    <!--<div>
+        <table st-table="rowCollection" class="table table-striped">
+	<thead>
+	<tr>
+		<th>Name</th>
+		<th>Surname</th>
+		<th>Email</th>
+		<th>Actions</th>
+		
+	</tr>
+	</thead>
+	<tbody>
+	<tr ng-repeat="row in vm.guardians">
+		<td>{{row.name}}</td>
+		<td>{{row.surname}}</td>
+		<td>{{row.email}}</td>
+		<td>
+           
+            <a class="btn btn-primary" ng-data-ui-sref="guardians.view({ guardianId: row._id })">View</a>
+               </td>		
+	</tr>
+	</tbody>
+</table>
+        
+        </div>-->
+  <div class="alert alert-warning text-center" data-ng-if="vm.guardians.$resolved && !vm.guardians.length">
+    No Guardians yet, why don't you <a data-ui-sref="guardians.create">create one</a>?
+  </div>
+</section>
