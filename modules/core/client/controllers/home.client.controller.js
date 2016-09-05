@@ -7,7 +7,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
 
     $scope.toggleMenu = function(){
-      $scope.menus = Menus.getMenu('topbar');
+      
       /*$("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");

@@ -17,6 +17,42 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+    vm.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    vm.format = vm.formats[0];
+      
+    
+      vm.dateOptions = {
+            dateDisabled: disabled,
+            formatYear: 'yy',
+            maxDate: new Date(2020, 5, 22),
+            minDate: new Date(),
+            startingDay: 1
+          };
+        
+         vm.startDatePopup = {
+            opened: false
+            };
+
+         vm.endDatePopup = {
+             opened: false
+            };  
+      
+       vm.openStartDatePopup = function() {
+    vm.startDatePopup.opened = true;
+  };
+
+  // Disable weekend selection
+  function disabled(data) {
+    var date = data.date,
+      mode = data.mode;
+    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+  }
+
+        
+  vm.openEndDatePopup = function() {
+    vm.endDatePopup.opened = true;
+  };
+      
       
     //vm.schoolClasses = SchoolclassesService.query();
 
@@ -81,6 +117,11 @@
       vm.createStudent = function(size){
             vm.student = {};
             vm.openStudentModal(size,vm.student);
+        };
+      
+       vm.createSchoolEvent = function(size){
+            vm.schoolevent = {};
+            vm.openSchoolEventModal(size,vm.schoolevent);
         };
       
       vm.createSubject = function(size){
@@ -254,6 +295,44 @@
     });
   };
       
+  vm.openSchoolEventModal = function (size,schoolevent) {
+    var modalInstance = $modal.open({
+      animation: vm.animationsEnabled,
+      ariaLabelledBy: 'modal-title',
+      ariaDescribedBy: 'modal-body',
+      templateUrl: 'modules/schools/client/views/modal-schoolevent.client.view.html',
+      controller: 'SchoolEventsModalController',
+      controllerAs: 'vm',
+      size: size,
+      resolve: {
+        /*items: function () {
+          return vm.items;
+        },*/
+          school: function(){
+              return vm.school;
+          },
+          schoolevent: function(){
+              return vm.schoolevent;
+          }
+      }
+    });
+
+    modalInstance.result.then(function (schoolevent) {
+      //vm.selected = selectedItem;
+        if(!(schoolevent._id))
+            {
+             
+                vm.school.schoolevents.push(schoolevent);
+                vm.school.$update();
+            }
+        else{
+            vm.school.$update();
+        }
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+  };    
+      
   vm.toggleAnimation = function () {
     vm.animationsEnabled = !vm.animationsEnabled;
   };
@@ -357,6 +436,41 @@
             {
              
                 vm.school.teachers.push(selectedItem);
+                vm.school.$update();
+            }*/
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+      
+      //COnfirm delete Schoo event
+      vm.confirmDeleteSchoolEvent = function (size,schoolevent) {
+    var modalInstance = $modal.open({
+      animation: vm.animationsEnabled,
+      ariaLabelledBy: 'modal-title',
+      ariaDescribedBy: 'modal-body',
+      templateUrl: 'modules/schools/client/views/modal-dialog-schoolevent-client.view.html',
+      controller: 'ConfirmDeleteSchoolEventController',
+      controllerAs: 'vm',
+      size: size,
+      resolve: {    
+          school: function(){
+              return vm.school;
+          },
+          schoolevent: function(){
+              return vm.schoolevent;
+          }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      
+        vm.removeByAttr(vm.school.schoolevents,'_id',selectedItem._id);
+         vm.school.$update();
+        /*if(!(selectedItem._id))
+            {
+             
+                vm.school.schoolevents.push(selectedItem);
                 vm.school.$update();
             }*/
     }, function () {

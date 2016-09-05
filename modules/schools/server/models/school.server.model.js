@@ -131,6 +131,33 @@ var SchoolSchema = new Schema({
       }
       
   }],
+    schoolevents:[{
+         title: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  startdate: {
+    type: Date,
+    trim: true
+  },
+  enddate: {
+    type: Date,
+    trim: true
+  },
+  termsyear: {
+    type: Number,
+    trim: true
+  },
+  created: {
+    type: Date,
+    default: Date.now
+  },
+  user: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  }
+    }],
   created: {
     type: Date,
     default: Date.now

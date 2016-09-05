@@ -1,0 +1,36 @@
+ <div class="modal-header">
+            <h3 class="modal-title" id="modal-title"> {{vm.schoolevent._id ? 'Update': 'New '}} schoolevent Details</h3>
+        </div>
+            <div class="modal-body" id="modal-body">
+                <!--<ul>
+                    <li ng-repeat="item in vm.items">
+                        <a href="#" ng-click="$event.preventDefault(); vm.selected.item = item">{{ item }}</a>
+                    </li>
+                </ul>
+                Selected: <b>{{ vm.selected.item }}</b>-->
+                <div class="container">
+
+                    <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2"> Title</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="vm.schoolevent.title" id="title" placeholder="Title" /></div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2"> Start Date</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="vm.schoolevent.startdate" id="startdate" placeholder="startdate" /></div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2"> End Date</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="vm.schoolevent.enddate" id="enddate" placeholder="enddate" uib-datepicker-popup  is-open="vm.startDatePopup.opened" datepicker-options="vm.dateOptions"  close-text="Close" ng-required="true"/></div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+                
+                <button class="btn btn-primary" type="button" ng-click="vm.save()">{{vm.schoolevent._id ? 'Update': 'Save'}}</button>
+                <!--<button class="btn btn-primary" type="button" ng-click="vm.ok()">OK</button>-->
+                <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancel</button>
+            </div>

@@ -64,8 +64,14 @@
               screens, and will appear non-collapsed on larger screens. When toggled using the button below,
               the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
             <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
-            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>-->
-            <button class="btn btn-primary" ng-click="toggleMenu()" ng-show="authentication.user"> Toggle Menu</button>
+            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+            <button class="btn btn-primary" ng-click="toggleMenu()" ng-show="authentication.user"> Toggle Menu</button>-->
+            <!--<button style=" outline: none;" id="toggleMenuButton" class="hamburger hamburger--slider is-active" type="button" ng-click="toggleMenu()" ng-show="authentication.user">
+              <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+              </span>
+            </button> --> 
+            
            {% block content %}{% endblock %}
 
         </div>

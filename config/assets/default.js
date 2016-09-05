@@ -6,7 +6,8 @@ module.exports = {
       css: [
         'public/lib/bootstrap/dist/css/bootstrap.css',
         'public/lib/bootstrap/dist/css/bootstrap-theme.css',
-        'public/lib/angular-xeditable/dist/css/xeditable.css'
+        'public/lib/angular-xeditable/dist/css/xeditable.css',
+        'public/lib/hamburgers/dist/hamburgers.css'
       ],
       js: [
         'public/lib/angular/angular.js',

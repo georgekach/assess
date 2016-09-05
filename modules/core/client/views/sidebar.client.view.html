@@ -1,6 +1,12 @@
 
-     <nav class="collapse navbar-collapse navbar-inverse" collapse="!isCollapsed" role="navigation">
+     <nav class="collapse navbar-collapse " collapse="!isCollapsed" role="navigation">
     <ul class="nav nav-pills nav-stacked " ng-if="menus.shouldRender(authentication.user);">
+        <li>
+            <div style="margin-top:10px; margin-bottom:10px;">
+        <img ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />
+                <span style="font-size:13px"> Welcome {{authentication.user.displayName}}</span>
+                </div>
+        </li>
       <li ng-repeat="item in menus.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type" ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}" dropdown="item.type === 'dropdown'">
         <a ng-switch-when="dropdown" class="dropdown-toggle" dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>
         <ul ng-switch-when="dropdown" class="dropdown-menu">

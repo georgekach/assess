@@ -8,13 +8,14 @@ angular.module('core').controller('SidebarController', ['$scope', 'Authenticatio
         
     $scope.authentication = Authentication;
 
-
+/*
     $scope.toggleMenu = function(){
       //$scope.menus = Menus.getMenu('topbar');
-    
-      var e = angular.element(document.querySelector('#wrapper'));
+     var e = angular.element(document.querySelector('#wrapper'));
       e.toggleClass('toggled');
-    };
+      var f = angular.element(document.querySelector('#toggleMenuButton'));
+      f.toggleClass('is-active');
+    };*/
      // var data = {menuname: 'sidebar',items: [{title:'Chat'},{title:'Second'}]};
       $scope.menus = Menus.getMenu('sidebar');
     }

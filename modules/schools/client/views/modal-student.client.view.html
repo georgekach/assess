@@ -45,8 +45,11 @@
                         <label class="col-md-2"> Current Class</label>
                         <div class="col-md-4">
                             <!--<input class="form-control" type="text" ng-model="vm.student.class" id="picture" placeholder="picture" />-->
-                         <select class="form-control" name="singleSelect" id="currentclass" ng-model="vm.student.currentclass" ng-options="class.name for class in vm.school.schoolclasses track by class._id">
-      <!--<option ng-repeat="option in vm.school.schoolclasses" ng-value="option._id">{{option.name}}</option>-->
+                         <select class="form-control" name="singleSelect" id="currentclass" ng-model="vm.student.currentclass" >
+      <!--
+ng-options="class as class.name for class in vm.school.schoolclasses track by class._id"
+-->
+                             <option ng-repeat="option in vm.school.schoolclasses" ng-value="option._id">{{option.name}}</option>
     </select>
                          </div>
                     </div>
