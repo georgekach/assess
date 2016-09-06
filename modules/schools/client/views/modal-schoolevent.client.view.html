@@ -23,7 +23,12 @@
                     <div class="row" style="margin-bottom: 5px;">
                         <label class="col-md-2"> End Date</label>
                         <div class="col-md-4">
-                            <input class="form-control" type="text" ng-model="vm.schoolevent.enddate" id="enddate" placeholder="enddate" uib-datepicker-popup  is-open="vm.startDatePopup.opened" datepicker-options="vm.dateOptions"  close-text="Close" ng-required="true"/></div>
+                            <p class="input-group">
+                            <input class="form-control" type="text" ng-model="vm.schoolevent.enddate" id="enddate" placeholder="enddate" uib-datepicker-popup="{{vm.format}}"  is-open="vm.startDatePopup.opened" datepicker-options="vm.dateOptions"  close-text="Close" ng-required="true"/>
+                            <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="vm.openEndDatePopup()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span></p>
+                        </div>
                     </div>
                     
                 </div>

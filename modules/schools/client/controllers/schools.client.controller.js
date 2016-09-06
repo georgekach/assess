@@ -17,41 +17,9 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
-    vm.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-    vm.format = vm.formats[0];
-      
     
-      vm.dateOptions = {
-            dateDisabled: disabled,
-            formatYear: 'yy',
-            maxDate: new Date(2020, 5, 22),
-            minDate: new Date(),
-            startingDay: 1
-          };
-        
-         vm.startDatePopup = {
-            opened: false
-            };
-
-         vm.endDatePopup = {
-             opened: false
-            };  
       
-       vm.openStartDatePopup = function() {
-    vm.startDatePopup.opened = true;
-  };
-
-  // Disable weekend selection
-  function disabled(data) {
-    var date = data.date,
-      mode = data.mode;
-    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-  }
-
-        
-  vm.openEndDatePopup = function() {
-    vm.endDatePopup.opened = true;
-  };
+      
       
       
     //vm.schoolClasses = SchoolclassesService.query();
