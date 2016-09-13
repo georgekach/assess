@@ -9,7 +9,7 @@
 
   function menuConfig(Menus) {
     // Set top bar menu items
-    Menus.addMenuItem('topbar', {
+ /*   Menus.addMenuItem('topbar', {
       title: 'Classregisters',
       state: 'classregisters',
       type: 'dropdown',
@@ -27,7 +27,7 @@
       title: 'Create Classregister',
       state: 'classregisters.create',
       roles: ['user']
-    });
+    });*/
 
     Menus.addMenuItem('sidebar',{
       title: 'Class Registers',

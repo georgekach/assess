@@ -1,3 +1,10 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+}
 .content {
   /*margin-top: 50px;*/
 }
@@ -116,8 +123,17 @@ a:hover .header-profile-image {
     background-color: #9e9e9e;
 }
 
-/*
+.full-bg-img {
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    overflow: hidden;
+    
+}
 
+
+/*
 .navbar-custom {
   background-color:#323f48;
   color:#ffffff;
@@ -331,7 +347,8 @@ a:hover .header-profile-image {
   }
 
   #page-content-wrapper {
-    padding: 20px;
+    /*padding: 20px;*/
+      width: 100%;
     position: relative;
   }
 
