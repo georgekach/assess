@@ -17,11 +17,14 @@
       .state('teacher.view', {
         url: '',
         templateUrl: 'modules/teachers/client/views/view-myteacher.client.view.html',
-        controller: 'TeachersListController',
+        controller: 'MyTeacherController',
         controllerAs: 'vm',
-        data: {
-          pageTitle: 'My Teacher View'
+        data:{
+          pageTitle: 'My Teacher View '
         }
       });
   }
+    
+   
+    
 })();

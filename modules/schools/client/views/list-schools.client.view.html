@@ -6,6 +6,9 @@
     <a data-ng-repeat="school in vm.schools"
        data-ui-sref="schools.view({ schoolId: school._id })"
        class="list-group-item">
+        <img style="height:50px;width:50px; display: inline-block;" ng-src="{{school.logo}}"/>
+        
+        <div>
       <small class="list-group-item-text">
         Posted on
         <span data-ng-bind="school.created | date:'mediumDate'"></span>
@@ -14,6 +17,8 @@
         <span data-ng-if="!school.user">Deleted User</span>
       </small>
       <h4 class="list-group-item-heading" data-ng-bind="school.name"></h4>
+            </div>
+        
     </a>
   </div>
   <div class="alert alert-warning text-center" data-ng-if="vm.schools.$resolved && !vm.schools.length">

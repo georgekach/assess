@@ -31,6 +31,14 @@
             <p class="help-block error-text" ng-message="required">Username is required.</p>
           </div>
         </div>
+          <div class="form-group" show-errors>
+          <label for="cellnumber">Cell Number</label>
+          <input type="text" id="cellnumber" name="cellnumber" class="form-control" ng-model="user.cellnumber" placeholder="cellnumber" lowercase required>
+          <div ng-messages="userForm.cellnumber.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Cell Number is required.</p>
+          </div>
+        </div>
+          
         <div class="text-center form-group">
           <button type="submit" class="btn btn-primary">Save Profile</button>
         </div>

@@ -1,6 +1,14 @@
 <section>
   <div class="page-header">
-    <h1>{{vm.school._id ? 'Edit School' : 'New School'}}</h1>
+      
+      <div class="col-md-2">
+      <img style="height: 80px;width: 80px;border-radius: 50%;" ng-src="{{vm.school.logo}}"/>
+          </div>
+      <div style="margin-left: 20px;padding-left:5px;">
+    <h3>{{vm.school._id ? vm.school.name : 'New School'}}</h3>
+      <p>{{vm.school.address}}</p>
+          </div>
+         
   </div>
   <div class="col-md-12">
     <!-- Nav tabs -->
@@ -121,8 +129,8 @@
 	<tbody>
 	<tr ng-repeat="row in vm.school.schoolevents">
 		<td>{{row.title}}</td>
-		<td>{{row.startdate}}</td>
-		<td>{{row.enddate}}</td>
+		<td>{{row.startdate| date:'dd-MM-yyyy'}}</td>
+		<td>{{row.enddate| date:'dd-MM-yyyy'}}</td>
 		<td>
            
             <button class="btn btn-primary" ng-click="vm.schoolevent=row;vm.openSchoolEventModal('lg', row);">View</button><button style="padding-right:10px;" class="btn btn-danger" ng-click="vm.schoolevent=row;vm.confirmDeleteSchoolEvent('md',row);">Delete</button>

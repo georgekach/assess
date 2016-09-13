@@ -22,5 +22,14 @@
       <span data-ng-if="!vm.guardian.user">Deleted User</span>
     </em>
   </small>
+    <div class="container">
+        A guardian would like to see the following about their wards
+        {{vm.guardian.name}}
+        <ul>
+        <li> list of their wards {{vm.guardian.wards.length}} </li>
+            <li>list of announcements or articles from the school</li>
+            <li>their wards grade book</li>
+        </ul>
+    </div>
   <p class="lead" data-ng-bind="vm.guardian.content"></p>
 </section>

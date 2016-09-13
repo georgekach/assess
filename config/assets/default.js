@@ -21,7 +21,8 @@ module.exports = {
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/angular-xeditable/dist/js/xeditable.js',
         'public/lib/jquery/dist/jquery.js',
-        'public/lib/bootstrap/dist/js/bootstrap.js'
+        'public/lib/bootstrap/dist/js/bootstrap.js',
+          'public/lib/underscore/underscore.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

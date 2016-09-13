@@ -1,6 +1,6 @@
 <section>
   <div class="page-header">
-    <h1 >My School Admin View</h1>
+    <h1 >My School Admin View [{{vm.school.name}}]</h1>
   </div>
   <div class="pull-right"
        data-ng-show="vm.school.isCurrentUserOwner">
@@ -22,5 +22,14 @@
       <span data-ng-if="!vm.school.user">Deleted User</span>
     </em>
   </small>
+    <div class="container">
+     Things that the Admin would like to see
+    <ul>
+       <li> Teachers Listing {{vm.school.teachers.length}}
+        </li> 
+        <li>Students Listing (Statistics on enrolment) {{vm.school.students.length}}</li>
+        <li>System Users listing</li>
+        </ul>
+    </div>
   <p class="lead" data-ng-bind="vm.school.content"></p>
 </section>

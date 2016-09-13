@@ -1,5 +1,5 @@
 .content {
-  margin-top: 50px;
+  /*margin-top: 50px;*/
 }
 .undecorated-link:hover {
   text-decoration: none;
@@ -41,9 +41,81 @@ a:hover .header-profile-image {
     padding-top: 8px;
 }
 
-.page-header h1{
-    padding-left: 65px;
+.sidebar-profile-image {
+  opacity: 0.8;
+  height: 65px;
+  width: 65px;
+  border-radius: 50%;
+  margin-right: 5px;
 }
+
+.profile-info {
+    background: transparent;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 15px;
+}
+
+.profile-image {
+    padding-right: 5px;
+    display: inline-block;
+}
+
+
+.profile-info .profile-image img {
+    height: 65px;
+    width: 65px;
+    float: right;
+    top: 5px;
+    left: 5px;
+    position: relative;
+   border-radius: 50%;
+}
+.profile-info .profile-details{
+    white-space: nowrap;
+}
+.profile-info .profile-details h3 {
+    margin: 10px 0 5px 0;
+}
+.profile-info .profile-details h3 a {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    color: #757575;
+    font-size: 15px;
+    line-height: 23px;
+    text-decoration: none;
+}
+.profile-info .profile-details .profile-title {
+    color: rgba(174, 178, 183, 1.0);
+    font-size: 13px;
+}
+.profile-info .profile-details .profile-status {
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    display: inline-block;
+}
+.profile-status.available, .uprofile-status.available {
+    background-color: #4CAF50;
+}
+.profile-status.busy, .uprofile-status.busy {
+    background-color: #f44336;
+}
+.profile-status.idle, .uprofile-status.idle {
+    background-color: #E91E63;
+}
+.profile-status.away, .uprofile-status.away {
+    background-color: #FFC107;
+}
+.profile-status.offline, .uprofile-status.offline {
+    background-color: #9e9e9e;
+}
+
 /*
 
 .navbar-custom {
@@ -112,6 +184,7 @@ a:hover .header-profile-image {
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
   background-color:#fff;
+  margin-top: 50px;
 }
 
 #wrapper.toggled #sidebar-wrapper {
@@ -121,7 +194,7 @@ a:hover .header-profile-image {
 #page-content-wrapper {
   width: 100%;
   position: absolute;
-  padding: 15px;
+  /*padding: 15px;*/
   background-color: #fff;
 }
 

@@ -53,8 +53,15 @@ var SchoolSchema = new Schema({
     trim: true
   },
   subjects: [{
+      subject:{
     type: Schema.ObjectId,
     ref: 'School.subjects'
+      },
+    teacher:{
+        type: Schema.ObjectId,
+    ref: 'School.teachers'
+    }
+    
   }],
   year: {
     type: Number,    
@@ -108,6 +115,11 @@ var SchoolSchema = new Schema({
       currentclass:{
         type: Schema.ObjectId, 
         ref: 'School.schoolclasses'   
+      },
+      currentclassname:{
+          type: String,
+          default:'',
+          trim: true
       },
   created: {
     type: Date,

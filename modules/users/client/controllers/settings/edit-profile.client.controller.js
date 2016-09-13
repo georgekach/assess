@@ -1,9 +1,10 @@
 'use strict';
 
-angular.module('users').controller('EditProfileController', ['$scope', '$http', '$location', 'Users', 'Authentication',
-  function ($scope, $http, $location, Users, Authentication) {
+angular.module('users').controller('EditProfileController', ['$scope', '$http', '$location', 'Users', 'Authentication','SchoolsService',
+  function ($scope, $http, $location, Users, Authentication,SchoolsService) {
     $scope.user = Authentication.user;
-
+ $scope.schools = SchoolsService.query();
+      
     // Update a user profile
     $scope.updateUserProfile = function (isValid) {
       $scope.success = $scope.error = null;

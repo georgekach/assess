@@ -17,7 +17,7 @@
       .state('schooladmin.view', {
         url: '',
         templateUrl: 'modules/schools/client/views/view-myschooladmin.client.view.html',
-        controller: 'SchoolsListController',
+        controller: 'MySchoolAdminController',
         controllerAs: 'vm',
         data: {
           pageTitle: 'My School Admin View'

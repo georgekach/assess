@@ -2,7 +2,7 @@
     
     'use strict';
     
-    angular.module('schools').controller('ClassesModalController', function ($modalInstance, school,schoolclass,$filter) {
+    angular.module('schools').controller('ClassesModalController', function ($modalInstance, school,schoolclass,$filter,$window) {
   var vm = this;
        
         vm.school=school;
@@ -13,6 +13,15 @@
       
     });
   };
+        vm.showSubjectName = function(c){
+            var result = $window._.findWhere(vm.school.subjects, {_id : c});
+            if(result)
+                return result.name;
+            else
+            return 'empty';
+          
+        };
+        
         
       vm.saveTable = function() {
     var results = [];

@@ -34,6 +34,10 @@ var GuardianSchema = new Schema({
     required: 'Please fill Guardian Phone number',
     trim: true
   },
+    wards:[{
+        type: Schema.ObjectId,
+        ref: 'School'
+    }],
   created: {
     type: Date,
     default: Date.now

@@ -17,7 +17,7 @@
     .state('guardian.view', {
         url: '',
         templateUrl: 'modules/guardians/client/views/view-myguardian.client.view.html',
-        controller: 'GuardiansListController',
+        controller: 'MyGuardianController',
         controllerAs: 'vm',
         data: {
           pageTitle: 'My Guardian View'

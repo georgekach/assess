@@ -10,7 +10,7 @@
   function menuConfig(Menus) {
     // Set top bar menu items
     Menus.addMenuItem('sidebar', {
-      title: 'Mcqexercises',
+      title: 'MCQ Exercises',
       state: 'mcqexercises',
       type: 'dropdown',
       roles: ['*']
@@ -18,13 +18,13 @@
 
     // Add the dropdown list item
     Menus.addSubMenuItem('sidebar', 'mcqexercises', {
-      title: 'List Mcqexercises',
+      title: 'List MCQ Exercises',
       state: 'mcqexercises.list'
     });
 
     // Add the dropdown create item
     Menus.addSubMenuItem('sidebar', 'mcqexercises', {
-      title: 'Create Mcqexercise',
+      title: 'Create MCQ Exercise',
       state: 'mcqexercises.create',
       roles: ['user']
     });

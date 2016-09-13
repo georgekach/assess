@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>Application Code Groups</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="applicationcodegroup in vm.applicationcodegroups"
+       ui-sref="applicationcodegroups.view({ applicationcodegroupId: applicationcodegroup._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="applicationcodegroup.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="applicationcodegroup.user" ng-bind="applicationcodegroup.user.displayName"></span>
+        <span ng-if="!applicationcodegroup.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="applicationcodegroup.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.applicationcodegroups.$resolved && !vm.applicationcodegroups.length">
+    No Applicationcodegroups yet, why don't you <a ui-sref="applicationcodegroups.create">create one</a>?
+  </div>
+</section>

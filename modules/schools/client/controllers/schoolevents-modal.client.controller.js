@@ -11,12 +11,12 @@
         vm.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
     vm.format = vm.formats[0];
       
+        vm.maxDate= new Date(2020, 5, 22);
+            vm.minDate=new Date();
     
       vm.dateOptions = {
-            dateDisabled: disabled,
-            formatYear: 'yy',
-            maxDate: new Date(2020, 5, 22),
-            minDate: new Date(),
+            
+            formatYear: 'yy',            
             startingDay: 1
           };
         
@@ -32,12 +32,12 @@
     vm.startDatePopup.opened = true;
   };
 
-  // Disable weekend selection
-  function disabled(data) {
-    var date = data.date,
-      mode = data.mode;
-    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-  }
+ 
+
+         // Disable weekend selection
+  vm.disabled = function(date, mode) {
+    return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+  };
 
         
   vm.openEndDatePopup = function() {

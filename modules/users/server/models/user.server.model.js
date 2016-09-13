@@ -60,6 +60,18 @@ var UserSchema = new Schema({
     default: '',
     required: 'Please fill in your cell number registered with your school'
   },
+    school:{
+        type: Schema.ObjectId,
+        ref:"Schools"
+    },
+        teacher:{
+        type: Schema.ObjectId,
+        ref:"Schools.teachers"
+    },
+    guardian :{
+      type: Schema.ObjectId,
+      ref: "Guardians"
+    },
   username: {
     type: String,
     unique: 'Username already exists',

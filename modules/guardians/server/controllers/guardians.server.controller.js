@@ -103,7 +103,7 @@ exports.guardianByID = function(req, res, next, id) {
     });
   }
 
-  Guardian.findById(id).populate('user', 'displayName').exec(function (err, guardian) {
+  Guardian.findById(id).populate('user', 'displayName').populate('wards.name').exec(function (err, guardian) {
     if (err) {
       return next(err);
     } else if (!guardian) {
