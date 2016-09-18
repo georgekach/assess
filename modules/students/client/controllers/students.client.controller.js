@@ -6,9 +6,9 @@
     .module('students')
     .controller('StudentsController', StudentsController);
 
-  StudentsController.$inject = ['$scope', '$state', 'Authentication', 'studentResolve'];
+  StudentsController.$inject = ['$scope', '$state', 'Authentication', 'studentResolve','$modalInstance'];
 
-  function StudentsController ($scope, $state, Authentication, student) {
+  function StudentsController ($scope, $state, Authentication, student,$modalInstance) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -16,7 +16,7 @@
     vm.error = null;
     vm.form = {};
     vm.remove = remove;
-    vm.save = save;
+    //vm.save = save;
 
     // Remove existing Student
     function remove() {
@@ -26,7 +26,7 @@
     }
 
     // Save Student
-    function save(isValid) {
+    /*function save(isValid) {
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.studentForm');
         return false;
@@ -48,6 +48,16 @@
       function errorCallback(res) {
         vm.error = res.data.message;
       }
-    }
+    }*/
+      
+      
+       vm.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+        
+        vm.save = function () {
+    $modalInstance.close(vm.student);
+            
+  };
   }
 })();

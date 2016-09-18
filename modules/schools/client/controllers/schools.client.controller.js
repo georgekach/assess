@@ -6,9 +6,9 @@
     .module('schools')
     .controller('SchoolsController', SchoolsController);
 
-  SchoolsController.$inject = ['$scope', '$state', 'Authentication', 'schoolResolve','SchoolclassesService','$modal','$log'];
+  SchoolsController.$inject = ['$scope', '$state', 'Authentication', 'schoolResolve','SchoolclassesService','$modal','$log','StudentsService'];
 
-  function SchoolsController ($scope, $state, Authentication, school,SchoolclassesService,$modal,$log) {
+  function SchoolsController ($scope, $state, Authentication, school,SchoolclassesService,$modal,$log,StudentsService) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -83,7 +83,8 @@
         };
 
       vm.createStudent = function(size){
-            vm.student = {};
+            vm.student = new StudentsService() ;
+           vm.student.school = vm.school._id;
             vm.openStudentModal(size,vm.student);
         };
       
@@ -191,8 +192,8 @@
       animation: vm.animationsEnabled,
       ariaLabelledBy: 'modal-title',
       ariaDescribedBy: 'modal-body',
-      templateUrl: 'modules/schools/client/views/modal-student.client.view.html',
-      controller: 'StudentsModalController',
+      templateUrl: 'modules/students/client/views/form-student.client.view.html',
+      controller: 'StudentsController',
       controllerAs: 'vm',
       size: size,
       resolve: {
@@ -204,6 +205,9 @@
           },
           student: function(){
               return vm.student;
+          },
+          studentResolve: function(){
+               return vm.student;
           }
       }
     });
@@ -213,11 +217,34 @@
         if(!(student._id))
             {
              
-                vm.school.students.push(student);
-                vm.school.$update();
+                
+                console.log(student);
+                
+                /*StudentsService.save(student,function(data){
+                    console.log(data);
+                });
+                console.log(student);*/
+                
+                student.$save(function(res){
+                    console.log('record saved');
+                }, function(res){
+                    vm.error = res.data.message;
+                    console.log(vm.error);
+                });
+                
+                 console.log(student.id);
+                //vm.school.students.push(student.id);
+                //vm.school.$update();
             }
         else{
-            vm.school.$update();
+            
+            student.$update(function(res){
+                
+            },function(res){
+                vm.error = res.data.message;
+            });
+            
+            //vm.school.$update();
         }
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());

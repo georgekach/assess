@@ -10,42 +10,49 @@ var mongoose = require('mongoose'),
  * Student Schema
  */
 var StudentSchema = new Schema({
-  name: {
+name: {
     type: String,
     default: '',
-    required: 'Please fill Student name',
     trim: true
   },
   surname: {
     type: String,
     default: '',
-    required: 'Please fill Student surname',
     trim: true
   },
   homeaddress: {
     type: String,
     default: '',
-    required: 'Please fill Student name',
     trim: true
   },
   picture: {
     type: String,
     default: '',
-    required: 'Please fill Student name',
     trim: true
   },
   studentnumber: {
     type: String,
     default: '',
-    required: 'Please fill Student name',
     trim: true
   },
   gender: {
     type: String,
     default: '',
-    required: 'Please fill Student name',
     trim: true
   },
+      currentclass:{
+        type: Schema.ObjectId, 
+        ref: 'School.schoolclasses'   
+      },
+      currentclassname:{
+          type: String,
+          default:'',
+          trim: true
+      },
+    school:{
+        type: Schema.ObjectId, 
+        ref: 'School'   
+      },
   created: {
     type: Date,
     default: Date.now
