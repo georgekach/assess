@@ -1,4 +1,4 @@
-<section>
+<!--<section>
   <div class="page-header">
     <h1>{{vm.teacher._id ? 'Edit Teacher' : 'New Teacher'}}</h1>
   </div>
@@ -21,4 +21,112 @@
       </fieldset>
     </form>
   </div>
-</section>
+</section>-->
+<div class="modal-header">
+            <h3 class="modal-title" id="modal-title"> {{vm.teacher._id ? 'Update': 'New '}} Teacher Details</h3>
+        </div>
+            <div class="modal-body" id="modal-body">
+             
+                <div class="container">
+   <ul class="nav nav-pills" role="tablist">
+      <li role="presentation" class="active"><a href="#teacherGeneraldetails" aria-controls="teacherGeneraldetails" role="tab" data-toggle="tab">General Details</a></li>
+      <li role="presentation"><a href="#teacherClasses" aria-controls="teacherClasses" role="tab" data-toggle="tab">Classes</a></li>
+    </ul>
+                    
+                    <div class="tab-content">
+      <div role="presentation" class="tab-pane active" id="teacherGeneraldetails" data-toggle="tab">
+                    
+                    <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2"> Name</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="vm.teacher.name" id="name" placeholder="name" /></div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2"> Surname</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="vm.teacher.surname" id="surname" placeholder="last Name" /></div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2"> cellnumber</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="vm.teacher.cellnumber" id="cellnumber" placeholder="cellnumber" /></div>
+                    </div>
+          <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2"> emailaddress</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="vm.teacher.emailaddress" id="emailaddress" placeholder="emailaddress" /></div>
+                    </div>
+          
+          <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2"> title</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="vm.teacher.title" id="title" placeholder="title" /></div>
+                    </div>
+
+                         </div>
+                        
+                        <div role="presentation" class="tab-pane" id="teacherClasses">
+                            
+                           
+                            <div class="row">
+                            <label class="col-md-2">Class</label>
+                            <div class="col-md-4">
+                                <!--<input class="form-control" type="text" ng-model="vm.student.class" id="picture" placeholder="picture" />-->
+                                <select class="form-control" id="currentclass" ng-model="vm.selectedclass" ng-options=" class._id as class.name for class in vm.school.schoolclasses">
+                                                        </select>
+                                
+                            </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-success" ng-click="vm.add()">Add</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                        <ul>
+                                            <li ng-repeat="class in vm.teacher.classes" >
+                                                {{class}}
+                                            <button class="btn btn-danger" ng-click="vm.remove($index)"> Remove</button>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                <div class="col-md-4">
+                                
+                                <table class="table table-bordered table-hover table-condensed">
+      <tr style="font-weight: bold">
+        <td >Subject Name</td>
+        <td >Level</td>
+        <td >Action</td>        
+      </tr>
+      <tr ng-repeat="subject in vm.schoolclass.subjects ">
+        <td>
+          <!-- editable username (text with validation) -->
+          <span editable-select="subject.subject" e-form="tableform" e-ng-options="s._id as s.name for s in vm.school.subjects">
+            {{ vm.showSubjectName(subject.subject) }}
+          </span>
+        </td>
+        <td>
+          <!-- editable status (select-local) 
+          <span editable-text="answer.answertext" e-form="tableform" >-->
+            {{ subject.level || 'empty'}}
+          <!--</span>-->
+        </td>
+        
+        <td><button type="button" ng-show="tableform.$visible" ng-click="deleteSubject(subject.id)" class="btn btn-danger pull-right">Delete</button></td>
+      </tr>
+    </table>
+                                
+                                
+                                
+                                
+                                </div>
+</div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                
+                <button class="btn btn-primary" type="button" ng-click="vm.save()">{{vm.teacher._id ? 'Update': 'Save'}}</button>
+                <!--<button class="btn btn-primary" type="button" ng-click="vm.ok()">OK</button>-->
+                <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancel</button>
+            </div>

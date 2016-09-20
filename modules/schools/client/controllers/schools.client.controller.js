@@ -6,9 +6,9 @@
     .module('schools')
     .controller('SchoolsController', SchoolsController);
 
-  SchoolsController.$inject = ['$scope', '$state', 'Authentication', 'schoolResolve','SchoolclassesService','$modal','$log','StudentsService'];
+  SchoolsController.$inject = ['$scope', '$state', 'Authentication', 'schoolResolve','SchoolclassesService','$modal','$log','StudentsService','filterFilter','TeachersService'];
 
-  function SchoolsController ($scope, $state, Authentication, school,SchoolclassesService,$modal,$log,StudentsService) {
+  function SchoolsController ($scope, $state, Authentication, school,SchoolclassesService,$modal,$log,StudentsService,filterFilter,TeachersService) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -16,29 +16,61 @@
     vm.error = null;
     vm.form = {};
     vm.remove = remove;
+    vm.removeStudent = removeStudent;
     vm.save = save;
-    
+    vm.refreshStudents = refreshStudentsList;
+    vm.refreshTeachers = refreshTeachers;
+     
+      function refreshStudentsList (){
+          var schoolstudentsPromise = StudentsService.query().$promise;
       
-      
-      
-      
-    //vm.schoolClasses = SchoolclassesService.query();
+          schoolstudentsPromise.then(function(result){
 
-    /*
-    $http.get('/api/schoolclasses').
-        success(function(data, status, headers, config) {
-          // do something useful with data
-          vm.schoolClasses = data;
-        }).
-        error(function(data, status, headers, config) {
-          $scope.error = 'Problem finding School classes';
-        });*/
+              var resultsArray = result;
 
+               vm.schoolstudents = filterFilter(resultsArray,{school:vm.school._id});
+              console.log(vm.schoolstudents.length);
+          },function(err){
+
+          });
+      }
+      
+      function refreshTeachers(){
+          var schoolsTeachersPromise = TeachersService.query().$promise;
+          schoolsTeachersPromise.then(function(results){
+              
+              var resultsArray = results;
+              vm.schoolsTeachers = filterFilter(resultsArray,{school:vm.school._id});
+          },function(err){
+              
+          });
+          
+      }
+      
+      //refresh Listings for the loading of the view
+      vm.refreshStudents();
+      vm.refreshTeachers();
+     
     
     // Remove existing School
     function remove() {
       if (confirm('Are you sure you want to delete?')) {
         vm.school.$remove($state.go('schools.list'));
+      }
+    }
+      // Remove existing Student from current School
+    function removeStudent() {
+      if (confirm('Are you sure you want to delete?')) {
+        vm.student.$remove(/*$state.go('schools.list')*/);
+          vm.refreshStudents ();
+      }
+    }
+      
+       // Remove existing Student from current School
+    function removeTeacher() {
+      if (confirm('Are you sure you want to delete?')) {
+        vm.teacher.$remove(/*$state.go('schools.list')*/);
+          vm.refreshTeachers();
       }
     }
 
@@ -72,9 +104,10 @@
   vm.animationsEnabled = true;
 
       //Create Functions for subdocuments
-        vm.create = function(size){
-            vm.teacher = {name:'',lastname:'',age:'0'};
-            vm.open(size,vm.teacher);
+        vm.createTeacher = function(size){
+            vm.teacher = new TeachersService();/*{name:'',lastname:''};*/
+            vm.teacher.school = vm.school._id;
+            vm.openTeacherModal(size,vm.teacher);
         };
 
         vm.createSchoolClass = function(size){
@@ -110,13 +143,13 @@
             return arr;
         };
 
-  vm.open = function (size,teacher) {
+  vm.openTeacherModal = function (size,teacher) {
     var modalInstance = $modal.open({
       animation: vm.animationsEnabled,
       ariaLabelledBy: 'modal-title',
       ariaDescribedBy: 'modal-body',
-      templateUrl: 'modules/schools/client/views/modal-teacher.client.view.html',
-      controller: 'ModalInstanceCtrl',
+      templateUrl: 'modules/teachers/client/views/form-teacher.client.view.html',
+      controller: 'TeachersController',
       controllerAs: 'vm',
       size: size,
       resolve: {
@@ -126,7 +159,7 @@
           school: function(){
               return vm.school;
           },
-          teacher: function(){
+          teacherResolve: function(){
               return vm.teacher;
           }
       }
@@ -137,11 +170,18 @@
         if(!(selectedItem._id))
             {
              
-                vm.school.teachers.push(selectedItem);
-                vm.school.$update();
+                vm.teacher.$save(function(res){
+                    vm.refreshTeachers();
+                },function(res){
+                    vm.error = res.data.message;
+                    console.log(vm.error);
+                });
+                
+                /*(selectedItem);
+                vm.school.$update();*/
             }
         else{
-            vm.school.$update();
+             vm.teacher.$update();
         }
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());
@@ -203,10 +243,16 @@
           school: function(){
               return vm.school;
           },
-          student: function(){
-              return vm.student;
-          },
+          /*student: function(){
+              
+           var stu =   StudentsService.query({_id: vm.student._id});
+              
+              return stu;
+          },*/
           studentResolve: function(){
+              /*var stu =   StudentsService.get({studentId: vm.student._id}).$promise;
+              
+              return stu;*/
                return vm.student;
           }
       }
@@ -227,6 +273,7 @@
                 
                 student.$save(function(res){
                     console.log('record saved');
+                     vm.refreshStudents ();
                 }, function(res){
                     vm.error = res.data.message;
                     console.log(vm.error);
@@ -237,7 +284,7 @@
                 //vm.school.$update();
             }
         else{
-            
+             console.log(student);
             student.$update(function(res){
                 
             },function(res){

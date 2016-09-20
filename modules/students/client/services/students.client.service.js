@@ -14,7 +14,14 @@
     }, {
       update: {
         method: 'PUT'
-      }
+      },
+        studsinschool:{
+            method: 'GET',
+            isArray: true,
+            params:{
+                school: 'school'
+            }
+        }
     });
   }
 })();

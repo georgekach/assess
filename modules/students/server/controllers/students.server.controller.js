@@ -80,7 +80,9 @@ exports.delete = function(req, res) {
 /**
  * List of Students
  */
-exports.list = function(req, res) { 
+exports.list = function(req, res) {
+    console.log('The value for the parameter is');
+    console.log(req.params);
   Student.find().sort('-created').populate('user', 'displayName').exec(function(err, students) {
     if (err) {
       return res.status(400).send({
@@ -113,5 +115,25 @@ exports.studentByID = function(req, res, next, id) {
     }
     req.student = student;
     next();
+  });
+};
+
+exports.studentsinschoolBySchoolID = function(req, res) {
+
+    var id = req.params.selectedschoolId;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send({
+      message: 'Student is invalid'
+    });
+  }
+
+  Student.find({school:id}).populate('user', 'displayName').exec(function (err, students) {
+    if (err) {
+     return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(students);
+    }    
   });
 };
