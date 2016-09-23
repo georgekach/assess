@@ -115,3 +115,23 @@ exports.teacherByID = function(req, res, next, id) {
     next();
   });
 };
+
+
+exports.teachersBySchoolID = function(req, res, next, id) {
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send({
+      message: 'Teacher is invalid'
+    });
+  }
+
+  Teacher.find({school:id}).populate('user', 'displayName').populate('classes','name').exec(function (err, teachers) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(teachers);
+    }    
+  });
+};

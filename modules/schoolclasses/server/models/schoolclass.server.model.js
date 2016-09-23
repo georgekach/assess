@@ -13,29 +13,29 @@ var SchoolclassSchema = new Schema({
   name: {
     type: String,
     default: '',
-    required: 'Please fill Schoolclass name',
+    /*required: 'Please fill Schoolclass name',*/
     trim: true
   },
   gradename: {
     type: String,
     default: '',
-    required: 'Please fill the class Grade name',
+    /*required: 'Please fill the class Grade name',*/
     trim: true
   },
-  subject: {
-    type: String,
-    default: '',
-    required: 'Please fill class subject name',
-    trim: true
-  },
+ subjects: [{
+      subject:{
+    type: Schema.ObjectId,
+    ref: 'Schoolsubject'
+      },
+    teacher:{
+        type: Schema.ObjectId,
+    ref: 'Teacher'
+    }
+    
+  }],
   year: {
     type: Number,
-    required: 'Please fill the year for the class',
-    trim: true
-  },
-  school: {
-    type: Schema.ObjectId,
-    ref: 'School',
+    /*required: 'Please fill the year for the class',*/
     trim: true
   },
   nextclass: {
@@ -43,6 +43,10 @@ var SchoolclassSchema = new Schema({
     ref: 'Schoolclass',
     trim: true
   },
+    school:{
+      type: Schema.ObjectId,
+      ref:'School'
+    },
   created: {
     type: Date,
     default: Date.now

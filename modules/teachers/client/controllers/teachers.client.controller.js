@@ -6,9 +6,9 @@
     .module('teachers')
     .controller('TeachersController', TeachersController);
 
-  TeachersController.$inject = ['$scope', '$state', 'Authentication', 'teacherResolve','$modalInstance'];
+  TeachersController.$inject = ['$scope', '$state', 'Authentication', 'teacherResolve','$modalInstance','ClassesInSchoolService','filterFilter','TeachersInSchoolService','$window'];
 
-  function TeachersController ($scope, $state, Authentication, teacher,$modalInstance) {
+  function TeachersController ($scope, $state, Authentication, teacher,$modalInstance,ClassesInSchoolService,filterFilter,TeachersInSchoolService,$window) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -17,8 +17,27 @@
     vm.form = {};
     vm.remove = remove;
   
+      var schoolClassesPromise =  ClassesInSchoolService.query({schoolclassSchoolId: vm.teacher.school}).$promise;
+      
+      schoolClassesPromise.then(function(data){
+          vm.schoolClasses = filterFilter(data,{school: vm.teacher.school});
+          
+          vm.userSelectedClass = vm.schoolClasses[0];
+      }, function(err){
+          
+      });
+      
+      var reportToPromise = TeachersInSchoolService.query({teachersSchoolId:vm.teacher.school}).$promise;
+      
+      reportToPromise.then(function(data){
+          vm.reportsTo = filterFilter(data,{_id:'!'+vm.teacher._id});
+      },function(err){
+          
+      });
+      
 
       vm.selectedclass = '';
+      
       
       // adding a class to the teacher
       vm.addTeachersClass = function() {
@@ -52,6 +71,15 @@
             
   };
   
+  vm.showClassName = function(c){
+            var result = $window._.findWhere(vm.schoolClasses, {_id : c});
+            if(result)
+                return result.name;
+            else
+            return 'empty';
+          
+        };    
+      
     // Save Teacher
 /*    function save(isValid) {
       if (!isValid) {

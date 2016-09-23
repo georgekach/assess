@@ -82,7 +82,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Calendar Events - {{vm.school.schoolevents ? vm.school.schoolevents.length : 0}}</a>
+      <a class="navbar-brand" href="#">Calendar Events - {{vm.schoolevents ? vm.schoolevents.length : 0}}</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -127,13 +127,13 @@
 	</tr>
 	</thead>
 	<tbody>
-	<tr ng-repeat="row in vm.school.schoolevents">
+	<tr ng-repeat="row in vm.schoolevents">
 		<td>{{row.title}}</td>
 		<td>{{row.startdate| date:'dd-MM-yyyy'}}</td>
 		<td>{{row.enddate| date:'dd-MM-yyyy'}}</td>
 		<td>
            
-            <button class="btn btn-primary" ng-click="vm.schoolevent=row;vm.openSchoolEventModal('lg', row);">View</button><button style="padding-right:10px;" class="btn btn-danger" ng-click="vm.schoolevent=row;vm.confirmDeleteSchoolEvent('md',row);">Delete</button>
+            <button class="btn btn-primary" ng-click="vm.schoolevent=row;vm.openSchoolEventModal('lg', row);">View</button><button style="padding-right:10px;" class="btn btn-danger" ng-click="vm.schoolevent=row;vm.removeSchoolEvent();">Delete</button>
                </td>		
 	</tr>
 	</tbody>
@@ -191,9 +191,9 @@
         <table st-table="rowCollection" class="table table-striped">
 	<thead>
 	<tr>
-		<th>first name</th>
-		<th>last name</th>
-		<th>Age</th>
+		<th>Name</th>
+		<th>Surname</th>
+		<th>Cell</th>
 		<th>Actions</th>
 		
 	</tr>
@@ -201,8 +201,8 @@
 	<tbody>
 	<tr ng-repeat="row in vm.schoolsTeachers">
 		<td>{{row.name}}</td>
-		<td>{{row.lastname}}</td>
-		<td>{{row.age}}</td>
+		<td>{{row.surname}}</td>
+		<td>{{row.cellnumber}}</td>
 		<td>
            
             <button class="btn btn-primary" ng-click="vm.teacher=row;vm.openTeacherModal('lg', row);">View</button><button style="padding-right:10px;" class="btn btn-danger" ng-click="vm.teacher=row;vm.removeTeacher();">Delete</button>
@@ -229,7 +229,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Classes - {{vm.school.schoolclasses ? vm.school.schoolclasses.length : 0}}</a>
+      <a class="navbar-brand" href="#">Classes - {{vm.schoolClasses ? vm.schoolClasses.length : 0}}</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -274,13 +274,13 @@
 	</tr>
 	</thead>
 	<tbody>
-	<tr ng-repeat="row in vm.school.schoolclasses">
+	<tr ng-repeat="row in vm.schoolClasses">
 		<td>{{row.name}}</td>
 		<td>{{row.gradename}}</td>
 		<td>{{row.subject}}</td>
 		<td>
            
-            <button class="btn btn-primary" ng-click="vm.schoolclass=row;vm.openSchoolClassModal('lg', row);">View</button><button style="padding-right:10px;" class="btn btn-danger" ng-click="vm.schoolclass=row;vm.confirmDeleteSchoolClass('md',row);">Delete</button>
+            <button class="btn btn-primary" ng-click="vm.schoolclass=row;vm.openSchoolClassModal('lg', row);">View</button><button style="padding-right:10px;" class="btn btn-danger" ng-click="vm.schoolclass=row;vm.removeSchoolClass();">Delete</button>
                </td>		
 	</tr>
 	</tbody>
@@ -376,7 +376,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Subjects - {{vm.school.subjects ? vm.school.subjects.length : 0}}</a>
+      <a class="navbar-brand" href="#">Subjects - {{vm.subjects ? vm.subjects.length : 0}}</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -421,13 +421,13 @@
 	</tr>
 	</thead>
 	<tbody>
-	<tr ng-repeat="row in vm.school.subjects">
+	<tr ng-repeat="row in vm.subjects">
 		<td>{{row.name}}</td>
 		<td>{{row.level}}</td>
 		
 		<td>
            
-            <button class="btn btn-primary" ng-click="vm.subject=row;vm.openSubjectModal('lg', row);">View</button><button style="padding-right:10px;" class="btn btn-danger" ng-click="vm.student=row;vm.confirmDeleteSsubject('md',row);">Delete</button>
+            <button class="btn btn-primary" ng-click="vm.schoolsubject=row;vm.openSubjectModal('lg', row);">View</button><button style="padding-right:10px;" class="btn btn-danger" ng-click="vm.schoolsubject=row;vm.removeSchoolSubject();">Delete</button>
                </td>		
 	</tr>
 	</tbody>
@@ -440,8 +440,6 @@
         
         </div>
   </div>
-    <div>
-
 
 
   </div>

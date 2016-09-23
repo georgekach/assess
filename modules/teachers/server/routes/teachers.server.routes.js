@@ -17,6 +17,10 @@ module.exports = function(app) {
     .put(teachers.update)
     .delete(teachers.delete);
 
+app.route('/api/teachersinschool/:teachersSchoolId').all(teachersPolicy.isAllowed)
+    .get(teachers.teachersBySchoolID);
+
   // Finish by binding the Teacher middleware
   app.param('teacherId', teachers.teacherByID);
+    app.param('teachersSchoolId',teachers.teachersBySchoolID);
 };

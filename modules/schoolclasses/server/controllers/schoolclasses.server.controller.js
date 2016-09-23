@@ -115,3 +115,22 @@ exports.schoolclassByID = function(req, res, next, id) {
     next();
   });
 };
+
+exports.schoolclassBySchoolID = function(req, res, next, id) {
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send({
+      message: 'Schoolclass is invalid'
+    });
+  }
+console.log(id);
+  Schoolclass.find({school: id}).populate('user', 'displayName').populate('subjects.subject','name').populate('subjects.teacher','surname').exec(function (err, schoolclasses) {
+    if (err) {
+      return next(err);
+    } else  {
+      return  res.jsonp(schoolclasses);
+    }
+    /*req.schoolclass = schoolclass;
+    next();*/
+  });
+};

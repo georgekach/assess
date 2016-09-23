@@ -20,6 +20,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/schoolclasses/:schoolclassId',
       permissions: '*'
+    }, {
+      resources: '/api/classesinschool/:schoolclassSchoolId',
+      permissions: '*'
     }]
   }, {
     roles: ['user'],
@@ -29,6 +32,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/schoolclasses/:schoolclassId',
       permissions: ['get']
+    }, {
+      resources: '/api/classesinschool/:schoolclassSchoolId',
+      permissions: '*'
     }]
   }, {
     roles: ['guest'],
@@ -38,6 +44,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/schoolclasses/:schoolclassId',
       permissions: ['get']
+    }, {
+      resources: '/api/classesinschool/:schoolclassSchoolId',
+      permissions: '*'
     }]
   }]);
 };

@@ -1,3 +1,4 @@
+<!--
 <section>
   <div class="page-header">
     <h1>{{vm.schoolclass._id ? 'Edit Schoolclass' : 'New Schoolclass'}}</h1>
@@ -34,14 +35,7 @@
             <p class="help-block error-text" ng-message="required">Schoolclass Year is required.</p>
           </div>
         </div>
-<!--
-        <div class="form-group" show-errors>
-          <label class="control-label" for="nextclass">Next Class</label>
-          <input name="nextclass" type="text" ng-model="vm.schoolclass.nextclass" id="nextclass" class="form-control" placeholder="Subject Name" required>
-          <div ng-messages="vm.form.schoolclassForm.nextclass.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Schoolclass Next Class is required.</p>
-          </div>
-        </div>-->
+
 
         <div class="form-group">
           <button type="submit" class="btn btn-default">{{vm.schoolclass._id ? 'Update' : 'Create'}}</button>
@@ -53,3 +47,101 @@
     </form>
   </div>
 </section>
+-->
+ <div class="modal-header">
+            <h3 class="modal-title" id="modal-title"> {{vm.schoolclass._id ? 'Update': 'New '}} Class Details</h3>
+        </div>
+            <div class="modal-body" id="modal-body">
+                <!--<ul>
+                    <li ng-repeat="item in vm.items">
+                        <a href="#" ng-click="$event.preventDefault(); vm.selected.item = item">{{ item }}</a>
+                    </li>
+                </ul>
+                Selected: <b>{{ vm.selected.item }}</b>-->
+                <div class="container">
+
+                    <ul class="nav nav-pills" role="tablist">
+      <li role="presentation" class="active"><a href="#subjectGeneraldetails" aria-controls="generaldetails" role="tab" data-toggle="tab">General Details</a></li>
+      <li role="presentation"><a href="#subjects" aria-controls="schoolcalendar" role="tab" data-toggle="tab">Subjects</a></li>
+    </ul>
+                    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="subjectGeneraldetails">
+          <div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2"> Name</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="vm.schoolclass.name" id="name" placeholder="Name" /></div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2"> Grade Name</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="vm.schoolclass.gradename" id="gradename" placeholder="last Name" /></div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2">Subject</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="vm.schoolclass.subject" id="subject" placeholder="Subject" /></div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2">Next Class</label>
+                        <div class="col-md-4">
+                            <!--<input class="form-control" type="text" ng-model="vm.schoolclass.nextclass" id="nextclass" placeholder="Next Class" />-->
+                        <select class="form-control" id="nextclass" ng-model="vm.schoolclass.nextclass" ng-options=" class._id as class.name for class in vm.nextclasses">
+                            </select> 
+                        </div>
+          </div>  </div>       
+                        </div>
+                        
+                        <div role="tabpanel" class="tab-pane" id="subjects">
+                            <div class="col-md-8">
+                            
+                <form editable-form name="tableform" onaftersave="saveTable()" oncancel="cancel()">            
+                            <!-- table -->
+    <table class="table table-bordered table-hover table-condensed">
+      <tr style="font-weight: bold">
+        <td >Subject Name</td>
+        <td >Level</td>
+        <td >Action</td>        
+      </tr>
+      <tr ng-repeat="subject in vm.schoolclass.subjects ">
+        <td>
+          <!-- editable username (text with validation) -->
+          <span editable-select="subject.subject" e-form="tableform" e-ng-options="s._id as s.name for s in vm.schoolSubjects">
+            {{ vm.showSubjectName(subject.subject) }}
+          </span>
+        </td>
+        <td>
+          <!-- editable status (select-local) 
+          <span editable-text="answer.answertext" e-form="tableform" >-->
+            {{ subject.level || 'empty'}}
+          <!--</span>-->
+        </td>
+        
+        <td><button type="button" ng-show="tableform.$visible" ng-click="deleteSubject(subject.id)" class="btn btn-danger pull-right">Delete</button></td>
+      </tr>
+    </table>
+            <div class="btn-edit">
+      <button type="button" class="btn btn-default" ng-show="!tableform.$visible" ng-click="tableform.$show()">
+        edit
+      </button>
+    </div>
+    <div class="btn-form" ng-show="tableform.$visible">
+      <button type="button" ng-disabled="tableform.$waiting" ng-click="vm.addSubject()" class="btn btn-default pull-right">Add Row</button>
+      <button type="submit" ng-disabled="tableform.$waiting" class="btn btn-primary">save</button>
+      <button type="button" ng-disabled="tableform.$waiting" ng-click="tableform.$cancel()" class="btn btn-default">cancel</button>
+    </div>                 
+            </form>    
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                
+                <button class="btn btn-primary" type="button" ng-click="vm.save()">{{vm.schoolclass._id ? 'Update': 'Save'}}</button>
+                <!--<button class="btn btn-primary" type="button" ng-click="vm.ok()">OK</button>-->
+                <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancel</button>
+            </div>

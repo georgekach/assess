@@ -16,7 +16,11 @@ module.exports = function(app) {
     .get(schoolclasses.read)
     .put(schoolclasses.update)
     .delete(schoolclasses.delete);
+    
+    app.route('/api/classesinschool/:schoolclassSchoolId').all(schoolclassesPolicy.isAllowed)
+    .get(schoolclasses.read);
 
   // Finish by binding the Schoolclass middleware
   app.param('schoolclassId', schoolclasses.schoolclassByID);
+  app.param('schoolclassSchoolId',schoolclasses.schoolclassBySchoolID);
 };

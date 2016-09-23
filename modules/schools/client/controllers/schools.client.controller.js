@@ -6,9 +6,9 @@
     .module('schools')
     .controller('SchoolsController', SchoolsController);
 
-  SchoolsController.$inject = ['$scope', '$state', 'Authentication', 'schoolResolve','SchoolclassesService','$modal','$log','StudentsService','filterFilter','TeachersService'];
+  SchoolsController.$inject = ['$scope', '$state', 'Authentication', 'schoolResolve','SchoolclassesService','$modal','$log','StudentsService','filterFilter','TeachersService','SchooleventsService','SchoolsubjectsService'];
 
-  function SchoolsController ($scope, $state, Authentication, school,SchoolclassesService,$modal,$log,StudentsService,filterFilter,TeachersService) {
+  function SchoolsController ($scope, $state, Authentication, school,SchoolclassesService,$modal,$log,StudentsService,filterFilter,TeachersService,SchooleventsService,SchoolsubjectsService) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -17,9 +17,14 @@
     vm.form = {};
     vm.remove = remove;
     vm.removeStudent = removeStudent;
+    vm.removeTeacher = removeTeacher;
+    vm.removeSchoolClass = removeSchoolClass;
     vm.save = save;
     vm.refreshStudents = refreshStudentsList;
     vm.refreshTeachers = refreshTeachers;
+    vm.refreshSchoolClasses = refreshSchoolClasses;
+    vm.refreshSchoolEvents = refreshSchoolEvents;
+    vm.refreshSchoolSubjects = refreshSchoolSubjects;
      
       function refreshStudentsList (){
           var schoolstudentsPromise = StudentsService.query().$promise;
@@ -47,11 +52,42 @@
           
       }
       
+      function refreshSchoolClasses(){
+          var schoolClassesPromise = SchoolclassesService.query().$promise;
+          schoolClassesPromise.then(function(result){
+              var resArray = result;
+              
+              vm.schoolClasses = filterFilter(resArray,{school: vm.school._id});
+          }, function(err){
+              //todo add code for error here
+          });
+      }
+      
+      function refreshSchoolEvents(){
+          var schoolEventsPromise = SchooleventsService.query().$promise;
+          schoolEventsPromise.then(function(results){
+              var resultsArray = results;
+              vm.schoolevents = filterFilter(resultsArray,{school: vm.school._id});
+          },function(error){
+              
+          });
+      }
+      
+      function refreshSchoolSubjects(){
+          var schoolSubjectsPromise = SchoolsubjectsService.query().$promise;
+          schoolSubjectsPromise.then(function(results){
+              vm.subjects = filterFilter(results,{school:vm.school._id});
+          },function(err){
+              // if there has been an error
+          });
+      }
+      
       //refresh Listings for the loading of the view
       vm.refreshStudents();
       vm.refreshTeachers();
-     
-    
+      vm.refreshSchoolClasses();
+      vm.refreshSchoolEvents();
+      vm.refreshSchoolSubjects();
     // Remove existing School
     function remove() {
       if (confirm('Are you sure you want to delete?')) {
@@ -74,6 +110,29 @@
       }
     }
 
+    function removeSchoolClass(){
+          if(confirm('Are you sure that you want to delete?')){
+          vm.schoolclass.$remove();
+          vm.refreshSchoolClasses();    
+          }
+          
+      }
+    
+      function removeSchoolEvent(){
+          if(confirm('Are you sure you want to delete?')){
+              vm.schoolevent.$remove();
+              vm.refreshSchooEvents();
+              
+          }
+      }
+      
+    function removeSchoolSubject(){
+        if(confirm('Are you sure you want to delete?')){
+            vm.subject.$remove();
+            vm.refreshSchoolSubjects();
+        }
+    }
+      
     // Save School
     function save(isValid) {
       if (!isValid) {
@@ -111,7 +170,8 @@
         };
 
         vm.createSchoolClass = function(size){
-            vm.schoolclass = {};
+            vm.schoolclass = new SchoolclassesService();
+            vm.schoolclass.school = vm.school._id;
             vm.openSchoolClassModal(size,vm.schoolclass);
         };
 
@@ -122,13 +182,15 @@
         };
       
        vm.createSchoolEvent = function(size){
-            vm.schoolevent = {};
+            vm.schoolevent = new SchooleventsService();
+           vm.schoolevent.school = vm.school._id;
             vm.openSchoolEventModal(size,vm.schoolevent);
         };
       
       vm.createSubject = function(size){
-            vm.subject = {};
-            vm.openSubjectModal(size,vm.subject);
+            vm.schoolsubject = new SchoolsubjectsService();
+            vm.schoolsubject.school = vm.school._id;
+            vm.openSubjectModal(size,vm.schoolsubject);
         };
       //Function to remove an object from an array
         vm.removeByAttr = function(arr, attr, value){
@@ -193,8 +255,8 @@
       animation: vm.animationsEnabled,
       ariaLabelledBy: 'modal-title',
       ariaDescribedBy: 'modal-body',
-      templateUrl: 'modules/schools/client/views/modal-schoolclass.client.view.html',
-      controller: 'ClassesModalController',
+      templateUrl: 'modules/schoolclasses/client/views/form-schoolclass.client.view.html',
+      controller: 'SchoolclassesController',
       controllerAs: 'vm',
       size: size,
       resolve: {
@@ -204,7 +266,7 @@
           school: function(){
               return vm.school;
           },
-          schoolclass: function(){
+          schoolclassResolve: function(){
               return vm.schoolclass;
           }
       }
@@ -215,11 +277,18 @@
         if(!(schoolclass._id))
             {
              
-                vm.school.schoolclasses.push(schoolclass);
-                vm.school.$update();
+                schoolclass.$save(function(res){
+                
+                    console.log('Record Saved');
+                    vm.refreshSchoolClasses();
+                },function(res){
+                    vm.error = res.data.message;
+                    console.log(vm.error);
+                });
+                
             }
         else{
-            vm.school.$update();
+            schoolclass.$update();
         }
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());
@@ -299,13 +368,13 @@
   };
       
       
-      vm.openSubjectModal = function (size,subject) {
+      vm.openSubjectModal = function (size,schoolsubject) {
     var modalInstance = $modal.open({
       animation: vm.animationsEnabled,
       ariaLabelledBy: 'modal-title',
       ariaDescribedBy: 'modal-body',
-      templateUrl: 'modules/schools/client/views/modal-subject.client.view.html',
-      controller: 'SubjectsModalController',
+      templateUrl: 'modules/schoolsubjects/client/views/form-schoolsubject.client.view.html',
+      controller: 'SchoolsubjectsController',
       controllerAs: 'vm',
       size: size,
       resolve: {
@@ -315,22 +384,29 @@
           school: function(){
               return vm.school;
           },
-          subject: function(){
-              return vm.subject;
+          schoolsubjectResolve: function(){
+              return vm.schoolsubject;
           }
       }
     });
 
-    modalInstance.result.then(function (subject) {
+    modalInstance.result.then(function (schoolsubject) {
       //vm.selected = selectedItem;
-        if(!(subject._id))
+        if(!(schoolsubject._id))
             {
              
-                vm.school.subjects.push(subject);
-                vm.school.$update();
+                schoolsubject.$save(function(res){
+                  
+                    vm.refreshSchoolSubjects();
+                    console.log('Record Saved');
+                },function(res){
+                    vm.error = res.data.message;
+                    console.log(vm.error);
+                });
+                //vm.school.$update();
             }
         else{
-            vm.school.$update();
+            schoolsubject.$update();
         }
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());
@@ -342,8 +418,8 @@
       animation: vm.animationsEnabled,
       ariaLabelledBy: 'modal-title',
       ariaDescribedBy: 'modal-body',
-      templateUrl: 'modules/schools/client/views/modal-schoolevent.client.view.html',
-      controller: 'SchoolEventsModalController',
+      templateUrl: 'modules/schoolevents/client/views/form-schoolevent.client.view.html',
+      controller: 'SchooleventsController',
       controllerAs: 'vm',
       size: size,
       resolve: {
@@ -353,7 +429,7 @@
           school: function(){
               return vm.school;
           },
-          schoolevent: function(){
+          schooleventResolve: function(){
               return vm.schoolevent;
           }
       }
@@ -364,11 +440,14 @@
         if(!(schoolevent._id))
             {
              
-                vm.school.schoolevents.push(schoolevent);
-                vm.school.$update();
+                vm.schoolevent.$save(function(){
+                    console.log('Record Saved');
+                    vm.refreshSchoolEvents();
+                });
+                //vm.schoolevent.$update();
             }
         else{
-            vm.school.$update();
+            vm.schoolevent.$update();
         }
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());

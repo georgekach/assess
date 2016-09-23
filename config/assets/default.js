@@ -7,7 +7,9 @@ module.exports = {
         'public/lib/bootstrap/dist/css/bootstrap.css',
         'public/lib/bootstrap/dist/css/bootstrap-theme.css',
         'public/lib/angular-xeditable/dist/css/xeditable.css',
-        'public/lib/hamburgers/dist/hamburgers.css'
+        'public/lib/hamburgers/dist/hamburgers.css',
+        'public/lib/textAngular/dist/textAngular.css',
+        'public/lib/font-awesome/css/font-awesome.css'
       ],
       js: [
         'public/lib/angular/angular.js',
@@ -22,7 +24,10 @@ module.exports = {
         'public/lib/angular-xeditable/dist/js/xeditable.js',
         'public/lib/jquery/dist/jquery.js',
         'public/lib/bootstrap/dist/js/bootstrap.js',
-          'public/lib/underscore/underscore.js'
+        'public/lib/underscore/underscore.js',
+        'public/lib/textAngular/dist/textAngular-rangy.min.js',
+          'public/lib/textAngular/dist/textAngular-sanitize.min.js',
+          'public/lib/textAngular/dist/textAngular.min.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

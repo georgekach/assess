@@ -50,6 +50,16 @@ var TeacherSchema = new Schema({
     ref: 'Teacher',
     trim: true
   },
+  classes:[{
+    type: Schema.ObjectId,
+    ref: 'Schoolclass'
+   }],
+  classsubjects:[{
+    class:{
+        type: Schema.ObjectId,
+        ref: 'Schoolclass'
+    }  
+  }],
   created: {
     type: Date,
     default: Date.now
