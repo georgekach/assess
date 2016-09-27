@@ -1,5 +1,5 @@
-<section>
-  <div class="page-header">
+<section style=" overflow-x: hidden;  overflow-y: hidden;">
+  <!--<div class="page-header">
     <h1 >My Teacher View</h1>
   </div>
   <div class="pull-right"
@@ -11,7 +11,19 @@
     <a class="btn btn-primary" data-ng-click="vm.remove()">
       <i class="glyphicon glyphicon-trash"></i>
     </a>
-  </div>
+  </div>-->
+    
+    <div style="margin-top:50px;">
+    <ul class="nav nav-pills" role="tablist">
+        <li role="presentation" class="active"><a href="#teachershome" aria-controls="guardianshome" role="tab" data-toggle="tab">My Teacher Home</a></li>
+        <li role="presentation"><a href="#teachersclasses" aria-controls="teachersclasses" role="tab" data-toggle="tab">My Classes </a></li>
+        <li role="presentation"><a href="#teachersannouncements" aria-controls="teachersannouncements" role="tab" data-toggle="tab">My Announcements </a></li>
+        
+    </ul>
+
+<div style="margin-top:10px;" class="tab-content">
+        <div role="presentation" class="tab-pane active" id="teachershome" data-toggle="tab">
+    
     Teachers need to see I am a teacher at {{vm.school.name}} My Name is {{vm.teacher.name}}
     <ul>
     <li>Their classes {{vm.teacher.classes.length}}</li>
@@ -19,8 +31,17 @@
         <li>Manage Homeworks</li>
         <li>Manage coursework</li>
     </ul>
+    </div>
     
-  <small>
+     <div role="presentation" class="tab-pane" id="teachersclasses" data-toggle="tab">
+         classes 
+         
+    </div>
+    <div role="presentation" class="tab-pane" id="teachersannouncements" data-toggle="tab">
+         Announcements
+    </div>
+        </div>
+  <!--<small>
     <em class="text-muted">
       Posted on
       <span data-ng-bind="vm.teacher.created | date:'mediumDate'"></span>
@@ -30,5 +51,5 @@
       <span data-ng-if="!vm.teacher.user">Deleted User</span>
     </em>
   </small>
-  <p class="lead" data-ng-bind="vm.teacher.content"></p>
+  <p class="lead" data-ng-bind="vm.teacher.content"></p>-->
 </section>

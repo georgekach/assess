@@ -1,0 +1,46 @@
+.wards-nav {
+    position: absolute;
+    
+    width: 200px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.wards-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+  
+}
+
+.wards-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+}
+
+.wards-nav li a:hover {
+    text-decoration: none;
+    color: #000;
+    background: rgba(255,255,255,0.2);
+}
+
+.wards-nav li a:active,
+.wards-nav li a:focus {
+    text-decoration: none;
+}
+
+.wards-nav > .wards-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.wards-nav > .wards-brand a {
+    color: #999999;
+}
+
+.wards-nav > .wards-brand a:hover {
+    color: #fff;
+    background: none;
+}

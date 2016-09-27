@@ -6,9 +6,9 @@
     .module('teachers')
     .controller('MyTeacherController', MyTeacherController);
 
-  MyTeacherController.$inject = ['$scope', '$state', 'Authentication','SchoolsService','$window'];
+  MyTeacherController.$inject = ['$scope', '$state', 'Authentication','SchoolsService','$window','TeachersService'];
 
-  function MyTeacherController ($scope, $state, Authentication,SchoolsService,$window) {
+  function MyTeacherController ($scope, $state, Authentication,SchoolsService,$window,TeachersService) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -17,12 +17,26 @@
       schoolId: vm.authentication.user.school
     }).$promise;
       
+      console.log(vm.authentication.user.teacher);
+      
+      var teacherPromise = TeachersService.get({teacherId:vm.authentication.user.teacher}).$promise;
+      
+      teacherPromise.then(function(teacher){
+         if(teacher)
+             {
+          vm.teacher = teacher;       
+             }
+          
+      },function(error){
+          
+      });
+      
       schoolPromise.then(function(v){
           vm.school = v;
-          vm.teacher = 
+          /*vm.teacher = 
           $window._.findWhere(v.teachers, {_id : vm.authentication.user.teacher})
           ;
-          console.log(vm.teacher);
+          console.log(vm.teacher);*/
           //console.log(v);
       });
       

@@ -1,8 +1,8 @@
 <section>
-  <div class="page-header">
-    <h1> My Guardian view</h1>
-  </div>
-  <div class="pull-right"
+    <!--<div class="page-header">
+        <h1> My Guardian view</h1>
+    </div>
+      <div class="pull-right"
        data-ng-show="vm.guardian.isCurrentUserOwner">
     <a class="btn btn-primary"
        data-ui-sref="guardians.edit({ guardianId: vm.guardian._id })">
@@ -21,15 +21,105 @@
             data-ng-bind="vm.guardian.user.displayName"></span>
       <span data-ng-if="!vm.guardian.user">Deleted User</span>
     </em>
-  </small>
-    <div class="container">
-        A guardian would like to see the following about their wards
-        {{vm.guardian.name}}
-        <ul>
-        <li> list of their wards {{vm.guardian.wards.length}} </li>
-            <li>list of announcements or articles from the school</li>
-            <li>their wards grade book</li>
-        </ul>
+  </small>-->
+    <div style="margin-top:50px;">
+    <ul class="nav nav-pills" role="tablist">
+        <li role="presentation" class="active"><a href="#guardianshome" aria-controls="guardianshome" role="tab" data-toggle="tab">My Guardian Home</a></li>
+        <li role="presentation"><a href="#guardianswards" aria-controls="guardianswards" role="tab" data-toggle="tab">My Wards </a></li>
+        <li role="presentation"><a href="#guardiansannouncements" aria-controls="guardiansannouncements" role="tab" data-toggle="tab">My Announcements </a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div role="presentation" class="tab-pane active" id="guardianshome" data-toggle="tab">
+
+            A guardian would like to see the following about their wards {{vm.guardian.name}}
+            <ul>
+                <li> list of their wards {{vm.guardian.wards.length}} </li>
+                <li>list of announcements or articles from the school</li>
+                <li>their wards grade book</li>
+            </ul>
+        </div>
+        <div role="presentation" class="tab-pane" id="guardianswards" data-toggle="tab">
+
+            <div style="margin-top: 10px;" class="container">
+
+                <div style="margin-bottom: 5px;" >
+                    
+                    <ul class="wards-nav">
+                        <li>
+                        <div class="input-group">
+  <input type="text" class="form-control " placeholder="Search" aria-describedby="basic-addon">
+  <span class="input-group-addon " id="basic-addon2"><i class="fa fa-search"></i></span>
+</div>
+                        </li>
+                        <li ng-repeat="ward in vm.wards">
+
+                           
+                            <a href="#"> <img src="./modules/core/client/img/avatars/boystudent.png" />  
+                                    <span>{{ward.name}}</span> 
+                                <small>{{ward.school}}</small>
+                                </a>
+                            <!--<div class=""> -->
+
+                                <!--<div>
+                                    <span>{{ward.name}}</span>
+                                    <div>
+                                        <small>{{ward.school}}</small>
+                                    </div>
+
+                                </div>-->
+                           <!-- </div>-->
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                
+                
+                
+                </div>
+            </div>
+            <div style="margin-left:230px;">
+            
+                <ul class="nav nav-pills" role="tablist">
+        <li role="presentation" class="active"><a href="#gradebook" aria-controls="guardianshome" role="tab" data-toggle="tab">Grade Book</a></li>
+        <li role="presentation"><a href="#attendance" aria-controls="guardianswards" role="tab" data-toggle="tab">Attendance </a></li>
+        <li role="presentation"><a href="#homework" aria-controls="guardiansannouncements" role="tab" data-toggle="tab">Homework </a></li>
+    </ul>
+                <div class="tab-content">
+        <div role="presentation" class="tab-pane active" id="gradebook" data-toggle="tab">
+            gradebook
+                    </div>
+                    
+                    <div role="presentation" class="tab-pane" id="attendance" data-toggle="tab">
+                        Attendance
+                    </div>
+                    
+                    <div role="presentation" class="tab-pane" id="homework" data-toggle="tab">
+                        homework
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+
+        <div role="presentation" class="tab-pane" id="guardiansannouncements" data-toggle="tab">
+
+            Announcements
+
+        </div>
+
+        <div role="presentation" class="tab-pane" id="homeworkdiary" data-toggle="tab">
+
+            Homework
+
+        </div>
+
     </div>
-  <p class="lead" data-ng-bind="vm.guardian.content"></p>
+
+
+
+    <p class="lead" data-ng-bind="vm.guardian.content"></p>
+        
+        </div>
 </section>

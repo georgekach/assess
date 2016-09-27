@@ -1,0 +1,46 @@
+.teacher-nav {
+    position: absolute;
+    
+    width: 200px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.teacher-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+  
+}
+
+.teacher-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+}
+
+.teacher-nav li a:hover {
+    text-decoration: none;
+    color: #000;
+    background: rgba(255,255,255,0.2);
+}
+
+.teacher-nav li a:active,
+.teacher-nav li a:focus {
+    text-decoration: none;
+}
+
+.teacher-nav > .teacher-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.teacher-nav > .teacher-brand a {
+    color: #999999;
+}
+
+.teacher-nav > .teacher-brand a:hover {
+    color: #fff;
+    background: none;
+}

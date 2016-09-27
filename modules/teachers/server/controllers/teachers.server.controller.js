@@ -103,7 +103,7 @@ exports.teacherByID = function(req, res, next, id) {
     });
   }
 
-  Teacher.findById(id).populate('user', 'displayName').exec(function (err, teacher) {
+  Teacher.findById(id).populate('user', 'displayName').populate('classes').exec(function (err, teacher) {
     if (err) {
       return next(err);
     } else if (!teacher) {
@@ -125,7 +125,7 @@ exports.teachersBySchoolID = function(req, res, next, id) {
     });
   }
 
-  Teacher.find({school:id}).populate('user', 'displayName').populate('classes','name').exec(function (err, teachers) {
+  Teacher.find({school:id}).populate('user', 'displayName').populate('classes').exec(function (err, teachers) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

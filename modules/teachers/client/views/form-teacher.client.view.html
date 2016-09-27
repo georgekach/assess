@@ -76,49 +76,59 @@
                             
                            
                             <div class="row">
-                            <label class="col-md-2">Class</label>
-                            <div class="col-md-4">
+                            <label class="col-md-1">Class</label>
+                            <div class="col-md-2">
                                 <!--<input class="form-control" type="text" ng-model="vm.student.class" id="picture" placeholder="picture" />-->
-                                <select class="form-control" id="currentclass" ng-model="vm.selectedclass" ng-options=" class._id as class.name for class in vm.schoolClasses">
+                                <select class="form-control" id="currentclass" ng-model="vm.selectedclass" ng-options=" class as class.name for class in vm.schoolClasses" >
+                                                        </select>
+                                
+                            </div>
+                                <!--<div class="col-md-2">
+                                    <button class="btn btn-success" ng-click="vm.addTeachersClass()">Add</button>
+                                </div>-->
+                                <label class="col-md-1">Subject</label>
+                                <div class="col-md-2">
+                                <!--<input class="form-control" type="text" ng-model="vm.student.class" id="picture" placeholder="picture" />-->
+                                <select class="form-control" id="currentclass" ng-model="vm.selectedClassSubject" ng-options=" subject as subject.subject.name for subject in vm.selectedclass.subjects">
                                                         </select>
                                 
                             </div>
                                 <div class="col-md-2">
                                     <button class="btn btn-success" ng-click="vm.addTeachersClass()">Add</button>
                                 </div>
+                                
                             </div>
                             <div class="row">
                                 <div class="col-md-3">
                                         <ul>
-                                            <li ng-repeat="class in vm.teacher.classes" >
+                                            <li ng-repeat="class in vm.schoolClasses |teachersClassesFilter: vm.teacher" >
                                                 
-                                                <a href="#" ng-bind="vm.showClassName(class)" ng-click="vm.userSelectedClass=class;"></a>
+                                                <a href="#" ng-click="vm.userSelectedClass=class;">{{class.name}}</a>
                                                 
-                                            <button class="btn btn-danger" ng-click="vm.remove($index)"> Remove</button>
+                                            <!--<button class="btn btn-danger" ng-click="vm.remove($index)"> Remove</button>-->
                                                 </li>
                                         </ul>
                                     </div>
                                 <div class="col-md-4">
-                                <ul>
-                                    <li ng-repeat="subject in vm.userSelectedClass.subjects ">{{subject.name</li>
-                                    </ul>
+                                
+                                  
                                 <table class="table table-bordered table-hover table-condensed">
       <tr style="font-weight: bold">
         <td >Subject Name</td>
         <td >Level</td>
         <td >Action</td>        
       </tr>
-      <tr ng-repeat="subject in vm.userSelectedClass.subjects ">
+      <tr ng-repeat="subject in vm.userSelectedClass.subjects  | filter: teacher=vm.teacher._id ">
         <td>
           <!-- editable username (text with validation) -->
           <span editable-select="subject.subject" e-form="tableform" e-ng-options="s._id as s.name for s in vm.school.subjects">
-            {{ vm.showSubjectName(subject.subject) }}
+            {{subject.subject.name}}
           </span>
         </td>
         <td>
           <!-- editable status (select-local) 
           <span editable-text="answer.answertext" e-form="tableform" >-->
-            {{ subject.level || 'empty'}}
+            {{ subject.subject.level || 'empty'}}
           <!--</span>-->
         </td>
         
