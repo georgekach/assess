@@ -9,56 +9,56 @@ var acl = require('acl');
 acl = new acl(new acl.memoryBackend());
 
 /**
- * Invoke Classregisters Permissions
+ * Invoke Classexercises Permissions
  */
 exports.invokeRolesPolicies = function () {
   acl.allow([{
     roles: ['admin'],
     allows: [{
-      resources: '/api/classregisters',
+      resources: '/api/classexercises',
       permissions: '*'
     }, {
-      resources: '/api/classregisters/:classregisterId',
+      resources: '/api/classexercises/:classexerciseId',
       permissions: '*'
     }, {
-      resources: '/api/registersforclass/:registerclassId',
+      resources: '/api/classexercisesforclass/:classExClassId',
       permissions: '*'
     }]
   }, {
     roles: ['user'],
     allows: [{
-      resources: '/api/classregisters',
+      resources: '/api/classexercises',
       permissions: ['get', 'post']
     }, {
-      resources: '/api/classregisters/:classregisterId',
+      resources: '/api/classexercises/:classexerciseId',
       permissions: ['get']
     }, {
-      resources: '/api/registersforclass/:registerclassId',
+      resources: '/api/classexercisesforclass/:classExClassId',
       permissions: '*'
     }]
   }, {
     roles: ['guest'],
     allows: [{
-      resources: '/api/classregisters',
+      resources: '/api/classexercises',
       permissions: ['get']
     }, {
-      resources: '/api/classregisters/:classregisterId',
+      resources: '/api/classexercises/:classexerciseId',
       permissions: ['get']
     }, {
-      resources: '/api/registersforclass/:registerclassId',
+      resources: '/api/classexercisesforclass/:classExClassId',
       permissions: '*'
     }]
   }]);
 };
 
 /**
- * Check If Classregisters Policy Allows
+ * Check If Classexercises Policy Allows
  */
 exports.isAllowed = function (req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
 
-  // If an Classregister is being processed and the current user created it then allow any manipulation
-  if (req.classregister && req.user && req.classregister.user && req.classregister.user.id === req.user.id) {
+  // If an Classexercise is being processed and the current user created it then allow any manipulation
+  if (req.classexercise && req.user && req.classexercise.user && req.classexercise.user.id === req.user.id) {
     return next();
   }
 

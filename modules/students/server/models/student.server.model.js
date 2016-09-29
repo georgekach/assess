@@ -42,7 +42,7 @@ name: {
   },
       currentclass:{
         type: Schema.ObjectId, 
-        ref: 'School.schoolclasses'   
+        ref: 'Schoolclass'   
       },
       currentclassname:{
           type: String,

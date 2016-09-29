@@ -1,24 +1,24 @@
 (function () {
   'use strict';
 
-  // Classregisters controller
+  // Classexercises controller
   angular
-    .module('classregisters')
-    .controller('ClassregistersController', ClassregistersController);
+    .module('classexercises')
+    .controller('ClassexercisesController', ClassexercisesController);
 
-  ClassregistersController.$inject = ['$scope', '$state', 'Authentication', 'classregisterResolve','$modalInstance'];
+  ClassexercisesController.$inject = ['$scope', '$state', '$window', 'Authentication', 'classexerciseResolve','$modalInstance'];
 
-  function ClassregistersController ($scope, $state, Authentication, classregister,$modalInstance) {
+  function ClassexercisesController ($scope, $state, $window, Authentication, classexercise,$modalInstance) {
     var vm = this;
 
     vm.authentication = Authentication;
-    vm.classregister = classregister;
+    vm.classexercise = classexercise;
     vm.error = null;
     vm.form = {};
     vm.remove = remove;
     //vm.save = save;
 
-      vm.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+     vm.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
     vm.format = vm.formats[0];
       
         vm.maxDate= new Date(2020, 5, 22);
@@ -30,14 +30,11 @@
             startingDay: 1
           };
         
-         vm.datemarkedDatePopup = {
+         vm.dateOfExDatePopup = {
             opened: false
             };
 
-         vm.dateofregisterDatePopup = {
-             opened: false
-            }; 
-      
+         
       /*vm.publishStartDatePopup = {
             opened: false
             };
@@ -46,13 +43,11 @@
              opened: false
             };*/
       
-       vm.openDatemarkedPopup = function() {
-    vm.datemarkedDatePopup.opened = true;
+       vm.openDateOfExDatePopup = function() {
+    vm.dateOfExDatePopup.opened = true;
   };
 
- vm.openDateofregisterPopup = function() {
-    vm.dateofregisterDatePopup.opened = true;
-  };
+ 
 
  /*vm.openPublishEndDatePopup = function() {
     vm.publishEndDatePopup.opened = true;
@@ -61,19 +56,18 @@
   vm.disabled = function(date, mode) {
     return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
   };
-
-        
-     
+ 
       
       
-    // Remove existing Classregister
+      
+    // Remove existing Classexercise
     function remove() {
-      if (confirm('Are you sure you want to delete?')) {
-        vm.classregister.$remove($state.go('classregisters.list'));
+      if ($window.confirm('Are you sure you want to delete?')) {
+        vm.classexercise.$remove($state.go('classexercises.list'));
       }
     }
 
-       vm.cancel = function () {
+      vm.cancel = function () {
     $modalInstance.dismiss('cancel');
   };
         
@@ -81,25 +75,23 @@
     $modalInstance.close(vm.classregister);
             
   };
-      
-      
-    // Save Classregister
- /*   function save(isValid) {
+    // Save Classexercise
+/*    function save(isValid) {
       if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'vm.form.classregisterForm');
+        $scope.$broadcast('show-errors-check-validity', 'vm.form.classexerciseForm');
         return false;
       }
 
       // TODO: move create/update logic to service
-      if (vm.classregister._id) {
-        vm.classregister.$update(successCallback, errorCallback);
+      if (vm.classexercise._id) {
+        vm.classexercise.$update(successCallback, errorCallback);
       } else {
-        vm.classregister.$save(successCallback, errorCallback);
+        vm.classexercise.$save(successCallback, errorCallback);
       }
 
       function successCallback(res) {
-        $state.go('classregisters.view', {
-          classregisterId: res._id
+        $state.go('classexercises.view', {
+          classexerciseId: res._id
         });
       }
 
@@ -108,4 +100,4 @@
       }
     }*/
   }
-})();
+}());

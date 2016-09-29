@@ -7,10 +7,15 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 /**
- * Classregister Schema
+ * Classexercise Schema
  */
-var ClassregisterSchema = new Schema({
-    register:[{
+var ClassexerciseSchema = new Schema({
+  name: {
+    type: String,
+    default: '',
+    trim: true
+  },
+    marks:[{
         student: {
             type: Schema.ObjectId,
             ref: 'Student'
@@ -18,24 +23,22 @@ var ClassregisterSchema = new Schema({
         notes: {
             type: String,
             default: '',
-            required: 'Please fill notes',
             trim: true
           },
-  present: {
-            type: Boolean,
+        mark: {
+            type: Number,
             default: false
           }
-    }],  
+    }],
+    totalmark: {
+            type: Number,
+            default: false
+          },
   schoolclass: {
     type: Schema.ObjectId,
     ref: 'Schoolclass'
   },
-  dateofregister: {
-    type: Date,
-    default: Date.now
-  },
-  
-  datemarked: {
+  dateofexercise: {
     type: Date,
     default: Date.now
   },
@@ -49,4 +52,4 @@ var ClassregisterSchema = new Schema({
   }
 });
 
-mongoose.model('Classregister', ClassregisterSchema);
+mongoose.model('Classexercise', ClassexerciseSchema);

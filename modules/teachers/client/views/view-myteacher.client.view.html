@@ -18,7 +18,7 @@
         <li role="presentation" class="active"><a href="#teachershome" aria-controls="guardianshome" role="tab" data-toggle="tab">My Teacher Home</a></li>
         <li role="presentation"><a href="#teachersclasses" aria-controls="teachersclasses" role="tab" data-toggle="tab">My Classes </a></li>
         <li role="presentation"><a href="#teachersannouncements" aria-controls="teachersannouncements" role="tab" data-toggle="tab">My Announcements </a></li>
-        
+        <li role="presentation"><a href="#teachersresources" aria-controls="teachersresources" role="tab" data-toggle="tab">My Resources </a></li>
     </ul>
 
 <div style="margin-top:10px;" class="tab-content">
@@ -34,12 +34,249 @@
     </div>
     
      <div role="presentation" class="tab-pane" id="teachersclasses" data-toggle="tab">
-         classes 
+                     <div style="margin-top: 10px;" class="container-fluid">
+
+                <div style="margin-bottom: 5px;" >
+                    
+                    <ul class="teacher-nav">
+                        <li style="padding-bottom: 10px; padding-top:10px;">
+                            <div class="input-group">
+                                <span style="text-align: left;" class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                                <input type="text" class="form-control " placeholder="Search" aria-describedby="basic-addon">                                
+                                
+                                
+                            </div>
+                        </li>
+                        <li ng-repeat="class in vm.schoolClasses | teachersClassesFilter: vm.teacher">
+
+                           
+                            <a href="#"> <img src="./modules/core/client/img/avatars/boystudent.png"
+                                              ng-click="vm.selectedClass=class;vm.refreshClassRegisters();"/>  
+                                    <span>{{class.name}}</span> 
+                                <small>{{class.level}}</small>
+                                </a>
+                            <!--<div class=""> -->
+
+                                <!--<div>
+                                    <span>{{ward.name}}</span>
+                                    <div>
+                                        <small>{{ward.school}}</small>
+                                    </div>
+
+                                </div>-->
+                           <!-- </div>-->
+                        </li>
+                    </ul>
+                </div>
+                <div style="margin-left:230px;">
+                
+                <ul class="nav nav-pills" role="tablist">
+        <li role="presentation" class="active"><a href="#classattendance" aria-controls="guardianshome" role="tab" data-toggle="tab">
+Class Registers</a></li>
+        <li role="presentation"><a href="#coursework" aria-controls="teachersclasses" role="tab" data-toggle="tab">Course Work </a></li>
+        <li role="presentation"><a href="#grades" aria-controls="teachersannouncements" role="tab" data-toggle="tab">Student Grades</a></li>
+        
+    </ul>
+              <div style="margin-top:10px;" class="tab-content">
+        <div role="presentation" class="tab-pane active" id="classattendance" data-toggle="tab">
+            
+                        <div class="container-fluid">
+            <nav class="navbar navbar-default" style="margin-top: 10px; margin-bottom: 15px;">
+  <div>
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Class Registers</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#" ng-click="vm.createRegister('lg');">Add New <span class="sr-only">(current)</span></a></li>   
+        
+      </ul>
+      <!--<form class="navbar-form navbar-left">
+        
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>-->
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+            </div > 
+            <div class="container-fluid">
+                  <div>
+        <table st-table="rowCollection" class="table table-striped">
+	<thead>
+	<tr>
+		<th>Date</th>
+		<th>Date Marked</th>
+		<th>Attended</th>
+        <th>Absent</th>
+		<th>Actions</th>
+		
+	</tr>
+	</thead>
+	<tbody>
+	<tr ng-repeat="row in vm.selectedClassesRegisters">
+		<td>{{row.dateofregister | date:'dd-MM-yyyy'}}</td>
+		<td>{{row.datemarked | date:'dd-MM-yyyy'}}</td><!--{{row.startdate| date:'dd-MM-yyyy'}}-->
+		<td>{{row.register.length | filter : row.register.present=='true'}}</td>
+        <td>{{row.register.length}}</td>
+		<td>
+           
+            <button class="btn btn-primary" ng-click="vm.classRegister=row;vm.openClassRegisterModal('lg', row,vm.selectedClass);">View</button><button style="padding-right:10px;" class="btn btn-danger" ng-click="vm.schoolevent=row;vm.removeSchoolEvent();">Delete</button>
+               </td>		
+	</tr>
+	</tbody>
+</table>
+        
+        </div>
+            
+            
+            
+            
+            </div>
+            
+                  </div>
+                   <div role="presentation" class="tab-pane" id="coursework" data-toggle="tab">
+                        <div class="container-fluid">
+                       
+                                   <nav class="navbar navbar-default" style="margin-top: 10px; margin-bottom: 15px;">
+  <div>
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Course work</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#" ng-click="vm.createExercise ('lg');">Add New <span class="sr-only">(current)</span></a></li>   
+        
+      </ul>
+      <!--<form class="navbar-form navbar-left">
+        
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>-->
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+                       </div>
+                       <div class="container-fulid">
+                       <!--TODO add the Table here-->
+                       
+                       </div>
+                  </div>
+                  
+                  <div role="presentation" class="tab-pane" id="grades" data-toggle="tab">
+                      
+                       <div class="container-fluid">
+                                  <nav class="navbar navbar-default" style="margin-top: 10px; margin-bottom: 15px;">
+  <div>
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Gradebook Registers</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#" ng-click="vm.createSchoolEvent('lg');">Add New <span class="sr-only">(current)</span></a></li>   
+        
+      </ul>
+      <!--<form class="navbar-form navbar-left">
+        
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>-->
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+                           
+                      </div>
+                      <div class="container-fluid">
+                      <!--TODO add the Table Here-->
+                      </div>
+                  </div>
+                    </div>
+                    
+                
+                </div>
+            </div>
          
     </div>
     <div role="presentation" class="tab-pane" id="teachersannouncements" data-toggle="tab">
          Announcements
     </div>
+    <div role="presentation" class="tab-pane" id="teachersresources" data-toggle="tab">
+    
+    Teachers resources
+    </div>
+    
         </div>
   <!--<small>
     <em class="text-muted">

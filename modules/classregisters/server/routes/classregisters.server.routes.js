@@ -16,7 +16,11 @@ module.exports = function(app) {
     .get(classregisters.read)
     .put(classregisters.update)
     .delete(classregisters.delete);
+    
+  app.route('/api/registersforclass/:registerclassId').all(classregistersPolicy.isAllowed)
+    .get(classregisters.classregisterByClassID);
 
   // Finish by binding the Classregister middleware
   app.param('classregisterId', classregisters.classregisterByID);
+  app.param('registerclassId',classregisters.classregisterByClassID);
 };

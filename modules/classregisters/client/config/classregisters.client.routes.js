@@ -71,9 +71,9 @@
     }).$promise;
   }
 
-  newClassregister.$inject = ['ClassregistersService'];
+  newClassregister.$inject = ['ClassregistersService','$modalInstance'];
 
-  function newClassregister(ClassregistersService) {
+  function newClassregister(ClassregistersService,$modalInstance) {
     return new ClassregistersService();
   }
 })();

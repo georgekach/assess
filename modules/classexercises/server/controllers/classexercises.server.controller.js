@@ -5,132 +5,133 @@
  */
 var path = require('path'),
   mongoose = require('mongoose'),
-  Classregister = mongoose.model('Classregister'),
+  Classexercise = mongoose.model('Classexercise'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
 /**
- * Create a Classregister
+ * Create a Classexercise
  */
 exports.create = function(req, res) {
-  var classregister = new Classregister(req.body);
-  classregister.user = req.user;
+  var classexercise = new Classexercise(req.body);
+  classexercise.user = req.user;
 
-  classregister.save(function(err) {
+  classexercise.save(function(err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.jsonp(classregister);
+      res.jsonp(classexercise);
     }
   });
 };
 
 /**
- * Show the current Classregister
+ * Show the current Classexercise
  */
 exports.read = function(req, res) {
   // convert mongoose document to JSON
-  var classregister = req.classregister ? req.classregister.toJSON() : {};
+  var classexercise = req.classexercise ? req.classexercise.toJSON() : {};
 
   // Add a custom field to the Article, for determining if the current User is the "owner".
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
-  classregister.isCurrentUserOwner = req.user && classregister.user && classregister.user._id.toString() === req.user._id.toString() ? true : false;
+  classexercise.isCurrentUserOwner = req.user && classexercise.user && classexercise.user._id.toString() === req.user._id.toString();
 
-  res.jsonp(classregister);
+  res.jsonp(classexercise);
 };
 
 /**
- * Update a Classregister
+ * Update a Classexercise
  */
 exports.update = function(req, res) {
-  var classregister = req.classregister ;
+  var classexercise = req.classexercise;
 
-  classregister = _.extend(classregister , req.body);
+  classexercise = _.extend(classexercise, req.body);
 
-  classregister.save(function(err) {
+  classexercise.save(function(err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.jsonp(classregister);
+      res.jsonp(classexercise);
     }
   });
 };
 
 /**
- * Delete an Classregister
+ * Delete an Classexercise
  */
 exports.delete = function(req, res) {
-  var classregister = req.classregister ;
+  var classexercise = req.classexercise;
 
-  classregister.remove(function(err) {
+  classexercise.remove(function(err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.jsonp(classregister);
+      res.jsonp(classexercise);
     }
   });
 };
 
 /**
- * List of Classregisters
+ * List of Classexercises
  */
-exports.list = function(req, res) { 
-  Classregister.find().sort('-created').populate('user', 'displayName').exec(function(err, classregisters) {
+exports.list = function(req, res) {
+  Classexercise.find().sort('-created').populate('user', 'displayName').exec(function(err, classexercises) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.jsonp(classregisters);
+      res.jsonp(classexercises);
     }
   });
 };
 
 /**
- * Classregister middleware
+ * Classexercise middleware
  */
-exports.classregisterByID = function(req, res, next, id) {
+exports.classexerciseByID = function(req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
-      message: 'Classregister is invalid'
+      message: 'Classexercise is invalid'
     });
   }
 
-  Classregister.findById(id).populate('user', 'displayName').exec(function (err, classregister) {
+  Classexercise.findById(id).populate('user', 'displayName').exec(function (err, classexercise) {
     if (err) {
       return next(err);
-    } else if (!classregister) {
+    } else if (!classexercise) {
       return res.status(404).send({
-        message: 'No Classregister with that identifier has been found'
+        message: 'No Classexercise with that identifier has been found'
       });
     }
-    req.classregister = classregister;
+    req.classexercise = classexercise;
     next();
   });
 };
 
-exports.classregisterByClassID = function(req, res, next, id) {
+
+exports.classexerciseBySchoolClassID = function(req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
-      message: 'Classregister is invalid'
+      message: 'Classexercise is invalid'
     });
   }
 
-  Classregister.find({schoolclass:id}).populate('user', 'displayName').exec(function (err, classregisters) {
+  Classexercise.find({classExClassId: id}).populate('user', 'displayName').exec(function (err, classexercises) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.jsonp(classregisters);
+      res.jsonp(classexercises);
     }
   });
 };

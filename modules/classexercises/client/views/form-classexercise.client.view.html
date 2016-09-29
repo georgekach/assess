@@ -1,20 +1,20 @@
 <!--
 <section>
   <div class="page-header">
-    <h1>{{vm.classregister._id ? 'Edit Classregister' : 'New Classregister'}}</h1>
+    <h1>{{vm.classexercise._id ? 'Edit Classexercise' : 'New Classexercise'}}</h1>
   </div>
   <div class="col-md-12">
-    <form name="vm.form.classregisterForm" class="form-horizontal" ng-submit="vm.save(vm.form.classregisterForm.$valid)" novalidate>
+    <form name="vm.form.classexerciseForm" class="form-horizontal" ng-submit="vm.save(vm.form.classexerciseForm.$valid)" novalidate>
       <fieldset>
         <div class="form-group" show-errors>
           <label class="control-label" for="name">Name</label>
-          <input name="name" type="text" ng-model="vm.classregister.name" id="name" class="form-control" placeholder="Name" required>
-          <div ng-messages="vm.form.classregisterForm.name.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Classregister name is required.</p>
+          <input name="name" type="text" ng-model="vm.classexercise.name" id="name" class="form-control" placeholder="Name" required>
+          <div ng-messages="vm.form.classexerciseForm.name.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Classexercise name is required.</p>
           </div>
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-default">{{vm.classregister._id ? 'Update' : 'Create'}}</button>
+          <button type="submit" class="btn btn-default">{{vm.classexercise._id ? 'Update' : 'Create'}}</button>
         </div>
         <div ng-show="vm.error" class="text-danger">
           <strong ng-bind="vm.error"></strong>
@@ -26,7 +26,7 @@
 -->
 <div class="modal-header">
 
-    <h3 class="modal-title" id="modal-title">{{vm.classregister._id ? 'Edit Class Register' : 'New Class Register'}}</h3>
+    <h3 class="modal-title" id="modal-title">{{vm.classexercise._id ? 'Edit Class Exercise' : 'New Class Exercise'}}</h3>
 
 </div>
 
@@ -35,31 +35,38 @@
        
             <!--<div class="form-group" show-errors>
           <label class="control-label" for="name">Name</label>
-          <input name="name" type="text" ng-model="vm.classregister.name" id="name" class="form-control" placeholder="Name" required>
-          <div ng-messages="vm.form.classregisterForm.name.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Classregister name is required.</p>
+          <input name="name" type="text" ng-model="vm.classexercise.name" id="name" class="form-control" placeholder="Name" required>
+          <div ng-messages="vm.form.classexerciseForm.name.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">classexercise name is required.</p>
           </div>
         </div>-->
+        <div class="row">
+        
+            <label class="control-label" for="name">Name</label>
+          <input name="name" type="text" ng-model="vm.classexercise.name" id="name" class="form-control" placeholder="Name" required>
+          <div ng-messages="vm.form.classexerciseForm.name.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">classexercise name is required.</p>
+          </div>
+        </div>
             <div  style="margin-bottom: 5px;">
-                <label class="col-md-2"> Date Of Register</label>
+                <label class="col-md-2"> Date Of Exercise</label>
                 <div class="col-md-4">
                     <p class="input-group">
-                        <input class="form-control" type="text" ng-model="vm.classregister.dateofregister" id="dateofregister" placeholder="dateofregister" datepicker-popup="{{vm.format}}" is-open="vm.dateofregisterDatePopup.opened" datepicker-options="vm.dateOptions" close-text="Close" ng-required="true" date-disabled="vm.disabled(date, mode)" min-date="vm.minDate" max-date="vm.maxDate" />
+                        <input class="form-control" type="text" ng-model="vm.classexercise.dateofregister" id="dateofregister" placeholder="dateofregister" datepicker-popup="{{vm.format}}" is-open="vm.dateofregisterDatePopup.opened" datepicker-options="vm.dateOptions" close-text="Close" ng-required="true" date-disabled="vm.disabled(date, mode)" min-date="vm.minDate" max-date="vm.maxDate" />
                         <span class="input-group-btn">
             <button type="button" class="btn btn-default" ng-click="$event.preventDefault(); $event.stopPropagation();vm.openDateofregisterPopup();"><i class="glyphicon glyphicon-calendar"></i></button>
           </span></p>
                 </div>
-                <label class="col-md-2"> Date Marked</label>
-                <div class="col-md-4">
-                    <p class="input-group">
-                        <input class="form-control" type="text" ng-model="vm.classregister.datemarked" id="dateofregister" placeholder="datemarked" datepicker-popup="{{vm.format}}" is-open="vm.datemarkedDatePopup.opened" datepicker-options="vm.dateOptions" close-text="Close" ng-required="true" date-disabled="vm.disabled(date, mode)" min-date="vm.minDate" max-date="vm.maxDate" />
-                        <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="$event.preventDefault(); $event.stopPropagation();vm.openDatemarkedPopup();"><i class="glyphicon glyphicon-calendar"></i></button>
-          </span></p>
+                
+             <div class="row">
+        
+            <label class="control-label" for="name">Total Mark</label>
+          <input name="name" type="text" ng-model="vm.classexercise.totalmark" id="totalmark" class="form-control" placeholder="Name" required>
+          <div ng-messages="vm.form.classexerciseForm.totalmark.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">classexercise totalmark is required.</p>
+          </div>
                 </div>
-            </div>
-
-            <div >
+                
             <div style="paddin-bottom: 10px;" class="col-md-6">
 
 
@@ -69,7 +76,7 @@
                         <td>Present</td>
                         <td>Action</td>
                     </tr>
-                    <tr ng-repeat="reg in vm.classregister.register">
+                    <tr ng-repeat="reg in vm.classexercise.register">
                         <td>
                             <!-- editable username (text with validation) -->
                             <!--<span editable-select="subject.subject" e-form="tableform" e-ng-options="s._id as s.name for s in vm.school.subjects">-->
@@ -98,7 +105,7 @@
 
 <div class="modal-footer">
 
-    <button class="btn btn-primary" type="button" ng-click="vm.save()">{{vm.classregister._id ? 'Update': 'Save'}}</button>
+    <button class="btn btn-primary" type="button" ng-click="vm.save()">{{vm.classexercise._id ? 'Update': 'Save'}}</button>
     <!--<button class="btn btn-primary" type="button" ng-click="vm.ok()">OK</button>-->
     <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancel</button>
 </div>
