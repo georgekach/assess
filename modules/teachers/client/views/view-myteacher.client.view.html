@@ -1,5 +1,5 @@
-<section style=" overflow-x: hidden;  overflow-y: hidden;">
-  <!--<div class="page-header">
+<section style="overflow-x: hidden;  overflow-y: hidden;">
+    <!--<div class="page-header">
     <h1 >My Teacher View</h1>
   </div>
   <div class="pull-right"
@@ -12,50 +12,49 @@
       <i class="glyphicon glyphicon-trash"></i>
     </a>
   </div>-->
-    
+
     <div style="margin-top:50px;">
-    <ul class="nav nav-pills" role="tablist">
-        <li role="presentation" class="active"><a href="#teachershome" aria-controls="guardianshome" role="tab" data-toggle="tab">My Teacher Home</a></li>
-        <li role="presentation"><a href="#teachersclasses" aria-controls="teachersclasses" role="tab" data-toggle="tab">My Classes </a></li>
-        <li role="presentation"><a href="#teachersannouncements" aria-controls="teachersannouncements" role="tab" data-toggle="tab">My Announcements </a></li>
-        <li role="presentation"><a href="#teachersresources" aria-controls="teachersresources" role="tab" data-toggle="tab">My Resources </a></li>
-    </ul>
+        <ul class="nav nav-pills" role="tablist">
+            <li role="presentation" class="active"><a href="#teachershome" aria-controls="guardianshome" role="tab" data-toggle="tab">My Teacher Home</a></li>
+            <li role="presentation"><a href="#teachersclasses" aria-controls="teachersclasses" role="tab" data-toggle="tab">My Classes </a></li>
+            <li role="presentation"><a href="#teachersannouncements" aria-controls="teachersannouncements" role="tab" data-toggle="tab">My Announcements </a></li>
+            <li role="presentation"><a href="#teachersresources" aria-controls="teachersresources" role="tab" data-toggle="tab">My Resources </a></li>
+        </ul>
 
-<div style="margin-top:10px;" class="tab-content">
-        <div role="presentation" class="tab-pane active" id="teachershome" data-toggle="tab">
-    
-    Teachers need to see I am a teacher at {{vm.school.name}} My Name is {{vm.teacher.name}}
-    <ul>
-    <li>Their classes {{vm.teacher.classes.length}}</li>
-        <li>Attendance Registers</li>
-        <li>Manage Homeworks</li>
-        <li>Manage coursework</li>
-    </ul>
-    </div>
-    
-     <div role="presentation" class="tab-pane" id="teachersclasses" data-toggle="tab">
-                     <div style="margin-top: 10px;" class="container-fluid">
+        <div style="margin-top:10px;" class="tab-content">
+            <div role="presentation" class="tab-pane active" id="teachershome" data-toggle="tab">
 
-                <div style="margin-bottom: 5px;" >
-                    
-                    <ul class="teacher-nav">
-                        <li style="padding-bottom: 10px; padding-top:10px;">
-                            <div class="input-group">
-                                <span style="text-align: left;" class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                                <input type="text" class="form-control " placeholder="Search" aria-describedby="basic-addon">                                
-                                
-                                
-                            </div>
-                        </li>
-                        <li ng-repeat="class in vm.schoolClasses | teachersClassesFilter: vm.teacher">
+                Teachers need to see I am a teacher at {{vm.school.name}} My Name is {{vm.teacher.name}}
+                <ul>
+                    <li>Their classes {{vm.teacher.classes.length}}</li>
+                    <li>Attendance Registers</li>
+                    <li>Manage Homeworks</li>
+                    <li>Manage coursework</li>
+                </ul>
+            </div>
 
-                           
-                            <a href="#"> <img src="./modules/core/client/img/avatars/boystudent.png"
-                                              ng-click="vm.selectedClass=class;vm.refreshClassRegisters();"/>  
-                                    <span>{{class.name}}</span> 
-                                <small>{{class.level}}</small>
+            <div role="presentation" class="tab-pane" id="teachersclasses" data-toggle="tab">
+                <div style="margin-top: 10px;" class="container-fluid">
+
+                    <div style="margin-bottom: 5px;">
+
+                        <ul class="teacher-nav">
+                            <li style="padding-bottom: 10px; padding-top:10px;">
+                                <div class="input-group">
+                                    <span style="text-align: left;" class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                                    <input type="text" class="form-control " placeholder="Search" aria-describedby="basic-addon">
+
+
+                                </div>
+                            </li>
+                            <li ng-repeat="class in vm.schoolClasses | teachersClassesFilter: vm.teacher">
+
+
+                                <a href="#"> <img src="./modules/core/client/img/avatars/boystudent.png" ng-click="vm.selectedClass=class;vm.refreshClassRegisters();" />
+                                    <span>{{class.name}}</span>
+                                    <small>{{class.level}}</small>
                                 </a>
-                            <!--<div class=""> -->
+                                <!--<div class=""> -->
 
                                 <!--<div>
                                     <span>{{ward.name}}</span>
@@ -64,221 +63,362 @@
                                     </div>
 
                                 </div>-->
-                           <!-- </div>-->
-                        </li>
-                    </ul>
-                </div>
-                <div style="margin-left:230px;">
-                
-                <ul class="nav nav-pills" role="tablist">
-        <li role="presentation" class="active"><a href="#classattendance" aria-controls="guardianshome" role="tab" data-toggle="tab">
-Class Registers</a></li>
-        <li role="presentation"><a href="#coursework" aria-controls="teachersclasses" role="tab" data-toggle="tab">Course Work </a></li>
-        <li role="presentation"><a href="#grades" aria-controls="teachersannouncements" role="tab" data-toggle="tab">Student Grades</a></li>
-        
-    </ul>
-              <div style="margin-top:10px;" class="tab-content">
-        <div role="presentation" class="tab-pane active" id="classattendance" data-toggle="tab">
-            
-                        <div class="container-fluid">
-            <nav class="navbar navbar-default" style="margin-top: 10px; margin-bottom: 15px;">
-  <div>
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Class Registers</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#" ng-click="vm.createRegister('lg');">Add New <span class="sr-only">(current)</span></a></li>   
-        
-      </ul>
-      <!--<form class="navbar-form navbar-left">
-        
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>-->
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-            </div > 
-            <div class="container-fluid">
-                  <div>
-        <table st-table="rowCollection" class="table table-striped">
-	<thead>
-	<tr>
-		<th>Date</th>
-		<th>Date Marked</th>
-		<th>Attended</th>
-        <th>Absent</th>
-		<th>Actions</th>
-		
-	</tr>
-	</thead>
-	<tbody>
-	<tr ng-repeat="row in vm.selectedClassesRegisters">
-		<td>{{row.dateofregister | date:'dd-MM-yyyy'}}</td>
-		<td>{{row.datemarked | date:'dd-MM-yyyy'}}</td><!--{{row.startdate| date:'dd-MM-yyyy'}}-->
-		<td>{{row.register.length | filter : row.register.present=='true'}}</td>
-        <td>{{row.register.length}}</td>
-		<td>
-           
-            <button class="btn btn-primary" ng-click="vm.classRegister=row;vm.openClassRegisterModal('lg', row,vm.selectedClass);">View</button><button style="padding-right:10px;" class="btn btn-danger" ng-click="vm.schoolevent=row;vm.removeSchoolEvent();">Delete</button>
-               </td>		
-	</tr>
-	</tbody>
-</table>
-        
-        </div>
-            
-            
-            
-            
-            </div>
-            
-                  </div>
-                   <div role="presentation" class="tab-pane" id="coursework" data-toggle="tab">
-                        <div class="container-fluid">
-                       
-                                   <nav class="navbar navbar-default" style="margin-top: 10px; margin-bottom: 15px;">
-  <div>
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Course work</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#" ng-click="vm.createExercise ('lg');">Add New <span class="sr-only">(current)</span></a></li>   
-        
-      </ul>
-      <!--<form class="navbar-form navbar-left">
-        
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>-->
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-                       </div>
-                       <div class="container-fulid">
-                       <!--TODO add the Table here-->
-                       
-                       </div>
-                  </div>
-                  
-                  <div role="presentation" class="tab-pane" id="grades" data-toggle="tab">
-                      
-                       <div class="container-fluid">
-                                  <nav class="navbar navbar-default" style="margin-top: 10px; margin-bottom: 15px;">
-  <div>
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Gradebook Registers</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#" ng-click="vm.createSchoolEvent('lg');">Add New <span class="sr-only">(current)</span></a></li>   
-        
-      </ul>
-      <!--<form class="navbar-form navbar-left">
-        
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>-->
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-                           
-                      </div>
-                      <div class="container-fluid">
-                      <!--TODO add the Table Here-->
-                      </div>
-                  </div>
+                                <!-- </div>-->
+                            </li>
+                        </ul>
                     </div>
-                    
-                
+                    <div style="margin-left:230px;">
+
+                        <ul class="nav nav-pills" role="tablist">
+                            <li role="presentation" class="active"><a href="#classattendance" aria-controls="guardianshome" role="tab" data-toggle="tab">
+Class Registers</a></li>
+                            <li role="presentation"><a href="#coursework" aria-controls="teachersclasses" role="tab" data-toggle="tab">Course Work </a></li>
+                            <li role="presentation"><a href="#grades" aria-controls="teachersannouncements" role="tab" data-toggle="tab">Student Grades</a></li>
+
+                        </ul>
+                        <div style="margin-top:10px;" class="tab-content">
+                            <div role="presentation" class="tab-pane active" id="classattendance" data-toggle="tab">
+
+                                 <div class="container-fluid">
+                                     <div class="btn-group">
+                                      <button type="button" class="btn btn-primary">Batch</button>
+                                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                      </ul>
+                                    </div>
+                                     
+                                     <button type="button" class="btn btn-success" data-toggle="tooltip" title="Refresh">
+                &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp;&nbsp;</button>
+                                     
+                                     <button type="button" class="btn btn-primary" data-toggle="tooltip" title="Add">
+                &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-plus" ng-click="vm.createRegister('lg');"></span>&nbsp;&nbsp;&nbsp;</button>
+                                     
+                                     <div class="pull-right">
+                                        <span class="text-muted"><b>1</b>–<b>50</b> of <b>160</b></span>
+                                        <div class="btn-group btn-group-sm">
+                                            <button type="button" class="btn btn-default">
+                                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-default">
+                                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                     
+                                </div>
+                                
+                                
+                                <div class="container-fluid">
+                                    <div>
+                                        <table st-table="rowCollection" class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Date Marked</th>
+                                                    <th>Attended</th>
+                                                    <th>Absent</th>
+                                                    <th>Actions</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="row in vm.selectedClassesRegisters">
+                                                    <td>{{row.dateofregister | date:'dd-MM-yyyy'}}</td>
+                                                    <td>{{row.datemarked | date:'dd-MM-yyyy'}}</td>
+                                                    <!--{{row.startdate| date:'dd-MM-yyyy'}}-->
+                                                    <td>{{row.register.length | filter : row.register.present=='true'}}</td>
+                                                    <td>{{row.register.length}}</td>
+                                                    <td>
+<div class="btn-group">
+                                                        <button class="btn btn-primary" ng-click="vm.classRegister=row;vm.openClassRegisterModal('lg', row,vm.selectedClass);"><span class="glyphicon glyphicon-eye-open"></span></button><button style="padding-right:10px;" class="btn btn-danger" ng-click="vm.schoolevent=row;vm.removeSchoolEvent();"><span class="glyphicon glyphicon-trash"></span></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+
+
+
+                                </div>
+
+                            </div>
+                            <div role="presentation" class="tab-pane" id="coursework" data-toggle="tab">
+                                
+                                
+                                 <div class="container-fluid">
+                                     <div class="btn-group">
+                                      <button type="button" class="btn btn-primary">Batch</button>
+                                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                      </ul>
+                                    </div>
+                                     
+                                     <button type="button" class="btn btn-success" data-toggle="tooltip" title="Refresh">
+                &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp;&nbsp;</button>
+                                     
+                                     <button type="button" class="btn btn-primary" data-toggle="tooltip" title="Add">
+                &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-plus" ng-click="vm.createExercise ('lg');"></span>&nbsp;&nbsp;&nbsp;</button>
+                                     
+                                     <div class="pull-right">
+                                        <span class="text-muted"><b>1</b>–<b>50</b> of <b>160</b></span>
+                                        <div class="btn-group btn-group-sm">
+                                            <button type="button" class="btn btn-default">
+                                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-default">
+                                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                     
+                                </div>
+                                
+                                
+        
+                                
+                                <div class="container-fulid">
+                                    <!--TODO add the Table here-->
+<div>
+                                        <table st-table="rowCollection" class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Date Marked</th>
+                                                    <th>Attended</th>
+                                                    <th>Absent</th>
+                                                    <th>Actions</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="row in vm.selectedClassesRegisters">
+                                                    <td>{{row.dateofregister | date:'dd-MM-yyyy'}}</td>
+                                                    <td>{{row.datemarked | date:'dd-MM-yyyy'}}</td>
+                                                    <!--{{row.startdate| date:'dd-MM-yyyy'}}-->
+                                                    <td>{{row.register.length | filter : row.register.present=='true'}}</td>
+                                                    <td>{{row.register.length}}</td>
+                                                    <td>
+
+                                                        <button class="btn btn-primary" ng-click="vm.classRegister=row;vm.openClassRegisterModal('lg', row,vm.selectedClass);">View</button><button style="padding-right:10px;" class="btn btn-danger" ng-click="vm.schoolevent=row;vm.removeSchoolEvent();">Delete</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div role="presentation" class="tab-pane" id="grades" data-toggle="tab">
+
+                                <div class="container-fluid">
+                                     <div class="btn-group">
+                                      <button type="button" class="btn btn-primary">Batch</button>
+                                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                      </ul>
+                                    </div>
+                                     
+                                     <button type="button" class="btn btn-success" data-toggle="tooltip" title="Refresh">
+                &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp;&nbsp;</button>
+                                     
+                                     <button type="button" class="btn btn-primary" data-toggle="tooltip" title="Add">
+                &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-plus" ng-click="vm.createExercise ('lg');"></span>&nbsp;&nbsp;&nbsp;</button>
+                                     
+                                     <div class="pull-right">
+                                        <span class="text-muted"><b>1</b>–<b>50</b> of <b>160</b></span>
+                                        <div class="btn-group btn-group-sm">
+                                            <button type="button" class="btn btn-default">
+                                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-default">
+                                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                     
+                                </div>                                
+
+                                <div class="container-fluid">
+                                    <!--TODO add the Table Here-->
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
                 </div>
+
             </div>
-         
-    </div>
-    <div role="presentation" class="tab-pane" id="teachersannouncements" data-toggle="tab">
-         Announcements
-    </div>
-    <div role="presentation" class="tab-pane" id="teachersresources" data-toggle="tab">
-    
-    Teachers resources
-    </div>
-    
+            <div role="presentation" class="tab-pane" id="teachersannouncements" data-toggle="tab">
+
+                <div class="container-fluid">
+                                     <div class="btn-group">
+                                      <button type="button" class="btn btn-primary">Batch</button>
+                                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                      </ul>
+                                    </div>
+                                     
+                                     <button type="button" class="btn btn-success" data-toggle="tooltip" title="Refresh">
+                &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp;&nbsp;</button>
+                                     
+                                     <button type="button" class="btn btn-primary" data-toggle="tooltip" title="Add">
+                &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-plus" ng-click="vm.createAnnouncement ('lg');"></span>&nbsp;&nbsp;&nbsp;</button>
+                                     
+                                     <div class="pull-right">
+                                        <span class="text-muted"><b>1</b>–<b>50</b> of <b>160</b></span>
+                                        <div class="btn-group btn-group-sm">
+                                            <button type="button" class="btn btn-default">
+                                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-default">
+                                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                     
+                                </div>          
+                
+                <div class="container-fluid">
+                    <table st-table="rowCollection" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Publish Start</th>
+                                <th>Publish End</th>
+                                <!--<th>Absent</th>-->
+                                <th>Actions</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="row in vm.teachersAnnouncements">
+                                <td style="vertical-align: middle;">{{row.title }}</td>
+                                <td>{{row.publishstartdate | date:'dd-MM-yyyy'}}</td>
+                                <!--{{row.startdate| date:'dd-MM-yyyy'}}-->
+                                <!--<td>{{row.register.length | filter : row.register.present=='true'}}</td>-->
+                                <td>{{row.publishenddate.length | date:'dd-MM-yyyy' }}</td>
+                                <td>
+<div class="btn-group btn-group">
+                                    <button class="btn btn-primary" ng-click="vm.openAnnouncementModal('lg', row);"><span class="glyphicon glyphicon-eye-open"></span></button><button style="padding-right:10px;" class="btn btn-danger" ng-click="vm.announcement=row;vm.removeAnnouncement(row);"><span class="glyphicon glyphicon-trash"></span></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+            <div role="presentation" class="tab-pane" id="teachersresources" data-toggle="tab">
+                
+                <div class="container-fluid">
+                                     <div class="btn-group">
+                                      <button type="button" class="btn btn-primary">Batch</button>
+                                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                      </ul>
+                                    </div>
+                                     
+                                     <button type="button" class="btn btn-success" data-toggle="tooltip" title="Refresh">
+                &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp;&nbsp;</button>
+                                     
+                                     <button type="button" class="btn btn-primary" data-toggle="tooltip" title="Add">
+                &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-plus" ng-click="vm.createMediaResource(lg);"></span>&nbsp;&nbsp;&nbsp;</button>
+                                     
+                                     <div class="pull-right">
+                                        <span class="text-muted"><b>1</b>–<b>50</b> of <b>160</b></span>
+                                        <div class="btn-group btn-group-sm">
+                                            <button type="button" class="btn btn-default">
+                                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-default">
+                                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                     
+                                </div>          
+                
+                
+                <!-- Add the table here-->
+                <div  class="container-fluid">
+                                        <table st-table="rowCollection" class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Title</th>
+                                                    <th>Description</th>
+                                                    <th>Date Uploaded</th>
+                                                    
+                                                    <th>Actions</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="row in vm.teachersResources">
+                                                    <td>{{row.title}}</td>
+                                                    <td>{{row.description}}</td>
+                                                    <!--{{row.startdate| date:'dd-MM-yyyy'}}-->
+                                                    <td><!--{{row.register.length | filter : row.register.present=='true'}}--></td>
+                                                   
+                                                    <td>
+<div class="btn-group btn-group">
+                                                        <button class="btn btn-primary" ng-click="vm.mediaresource=row;vm.openMediaResourceModal('lg', row);"><span class="glyphicon glyphicon-eye-open"></span></button><button style="padding-right:10px;" class="btn btn-danger" ng-click="vm.mediaresource=row;vm.removeMediaResource();"><span class="glyphicon glyphicon-trash"></span></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+            </div>
+
         </div>
-  <!--<small>
+        <!--<small>
     <em class="text-muted">
       Posted on
       <span data-ng-bind="vm.teacher.created | date:'mediumDate'"></span>

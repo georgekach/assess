@@ -6,9 +6,9 @@
     .module('teachers')
     .controller('MyTeacherController', MyTeacherController);
 
-  MyTeacherController.$inject = ['$scope', '$state', 'Authentication','SchoolsService','$window','TeachersService','ClassesInSchoolService','filterFilter','$modal','ClassregistersService','RegistersForClassService','$log','ClassExercisesForClassService','ClassexercisesService'];
+  MyTeacherController.$inject = ['$scope', '$state', 'Authentication','SchoolsService','$window','TeachersService','ClassesInSchoolService','filterFilter','$modal','ClassregistersService','RegistersForClassService','$log','ClassExercisesForClassService','ClassexercisesService','AnnouncementsForTeacherService','AnnouncementsService','MediaResourcesForTeacherService','MediaresourcesService'];
 
-  function MyTeacherController ($scope, $state, Authentication,SchoolsService,$window,TeachersService,ClassesInSchoolService,filterFilter,$modal,ClassregistersService,RegistersForClassService,$log,ClassExercisesForClassService,ClassexercisesService) {
+  function MyTeacherController ($scope, $state, Authentication,SchoolsService,$window,TeachersService,ClassesInSchoolService,filterFilter,$modal,ClassregistersService,RegistersForClassService,$log,ClassExercisesForClassService,ClassexercisesService,AnnouncementsForTeacherService,AnnouncementsService,MediaResourcesForTeacherService,MediaresourcesService) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -63,6 +63,11 @@
     vm.save = save;
     vm.refreshClassRegisters = refreshClassRegisters;
     vm.refreshClassExercises = refreshClassExercises;
+    vm.refreshTeachersAnnouncements = refreshTeachersAnnouncements;
+    vm.refreshTeachersMediaResources = refreshTeachersMediaResources;
+      
+      vm.refreshTeachersAnnouncements();
+      vm.refreshTeachersMediaResources();
       
       function refreshClassRegisters(){
           var classClassRegistersPromise = RegistersForClassService.query({registerclassId: vm.selectedClass._id}).$promise;
@@ -88,6 +93,29 @@
           //TODO Add Code that calls a list of all Class Registers belonging to the selected class
       }
       
+      function refreshTeachersAnnouncements(){
+          var teachersAnnouncementsPromise = AnnouncementsForTeacherService.query({origionatorId:vm.authentication.user.teacher}).$promise;
+          
+          teachersAnnouncementsPromise.then(function(data){
+             if(data){
+                 vm.teachersAnnouncements = data;
+             } 
+          },function(err){
+              
+          });
+      }
+      
+      function refreshTeachersMediaResources(){
+          var teachersMediaResourcesPromise = MediaResourcesForTeacherService.query({mendiaresourceTeacherId:vm.authentication.user.teacher}).$promise;
+          
+          teachersMediaResourcesPromise.then(function(data){
+              
+              vm.teachersResources = data;
+              
+          }, function(error){
+              
+          });
+      }
       //create Class Register 
       vm.createRegister = function(size){
             vm.classRegister = new ClassregistersService();
@@ -103,6 +131,20 @@
             vm.openClassExerciseModal(size,vm.classExercise);
         };
       
+      
+      vm.createAnnouncement = function(size){
+            vm.announcement = new AnnouncementsService();
+            vm.announcement.originator = vm.authentication.user.teacher;
+            //vm.selectedClass.
+            vm.openAnnouncementModal(size,vm.announcement);
+        };
+      
+      vm.createMediaResource = function(size){
+            vm.mediaresource = new MediaresourcesService();
+            vm.mediaresource.teacher = vm.authentication.user.teacher;
+            //vm.selectedClass.
+            vm.openMediaResourceModal(size,vm.mediaresource);
+        };
       
        vm.openClassRegisterModal = function (size,classRegister,selectedClass) {
     var modalInstance = $modal.open({
@@ -195,6 +237,93 @@
     });
   };
       
+  
+      vm.openAnnouncementModal = function (size,announcement) {
+    var modalInstance = $modal.open({
+      animation: vm.animationsEnabled,
+      ariaLabelledBy: 'modal-title',
+      ariaDescribedBy: 'modal-body',
+      templateUrl: 'modules/announcements/client/views/form-announcement.client.view.html',
+      controller: 'AnnouncementsController',
+      controllerAs: 'vm',
+      size: size,
+      resolve: {
+        /*items: function () {
+          return vm.items;
+        },*/
+          
+          announcementResolve: function(){
+              return announcement;//vm.announcement;
+          }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      vm.announcement = selectedItem;
+        if(!(selectedItem._id))
+            {
+             
+                vm.announcement.$save(function(res){
+                    vm.refreshTeachersAnnouncements();
+                },function(res){
+                    vm.error = res.data.message;
+                    console.log(vm.error);
+                });
+                
+                /*(selectedItem);
+                vm.school.$update();*/
+            }
+        else{
+             //vm.teacher.$update();
+        }
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+      
+      //openMediaResourceModal
+            vm.openMediaResourceModal = function (size,mediaresource) {
+    var modalInstance = $modal.open({
+      animation: vm.animationsEnabled,
+      ariaLabelledBy: 'modal-title',
+      ariaDescribedBy: 'modal-body',
+      templateUrl: 'modules/mediaresources/client/views/form-mediaresource.client.view.html',
+      controller: 'MediaresourcesController',
+      controllerAs: 'vm',
+      size: size,
+      resolve: {
+        /*items: function () {
+          return vm.items;
+        },*/
+          
+          mediaresourceResolve: function(){
+              return mediaresource;//vm.announcement;
+          }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      vm.mediaResource = selectedItem;
+        if(!(selectedItem._id))
+            {
+             
+                vm.mediaResource.$save(function(res){
+                    vm.refreshTeachersMediaResources();
+                },function(res){
+                    vm.error = res.data.message;
+                    console.log(vm.error);
+                });
+                
+                /*(selectedItem);
+                vm.school.$update();*/
+            }
+        else{
+             //vm.teacher.$update();
+        }
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
       
     // Remove existing Teacher
     function remove() {
@@ -203,6 +332,22 @@
       }
     }
 
+      function removeAnnouncement(announcement) {
+      if (confirm('Are you sure you want to delete?')) {
+          
+           AnnouncementsService.get({announcementId: announcement._id},function(announcementToDelete){
+              
+              announcementToDelete.$remove(function(){
+              console.log('Deleted Announcement');
+          });
+              
+          });
+          
+          
+          
+        //vm.teacher.$remove($state.go('teachers.list'));
+      }
+    }
     // Save Teacher
     function save(isValid) {
       if (!isValid) {

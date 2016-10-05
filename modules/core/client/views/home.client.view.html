@@ -20,7 +20,7 @@
             </div>
             <div style="padding-top:20vh;" class="col-md-6">
             
-                <div style="background-color: transparent;" ng-include="'/modules/users/client/views/authentication/signin.client.view.html'" ></div>
+                <div style="background-color: transparent;" ng-include="'/modules/users/client/views/authentication/signin.client.view.html'" ng-hide="authentication.user"></div>
             </div>
         
         </div>

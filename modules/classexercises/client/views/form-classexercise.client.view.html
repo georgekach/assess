@@ -31,7 +31,7 @@
 </div>
 
 <div class="modal-body" id="modal-body">
-    <div class="container col-md-12">
+    <!--<div class="container">-->
        
             <!--<div class="form-group" show-errors>
           <label class="control-label" for="name">Name</label>
@@ -40,15 +40,16 @@
             <p class="help-block error-text" ng-message="required">classexercise name is required.</p>
           </div>
         </div>-->
-        <div class="row">
+        <div class="row" style="margin-bottom: 5px;">
         
-            <label class="control-label" for="name">Name</label>
-          <input name="name" type="text" ng-model="vm.classexercise.name" id="name" class="form-control" placeholder="Name" required>
+            <label class="control-label col-md-2" for="name">Name</label>
+          <div class="col-md-10">
+            <input name="name" type="text" ng-model="vm.classexercise.name" id="name" class="form-control " placeholder="Name" required></div>
           <div ng-messages="vm.form.classexerciseForm.name.$error" role="alert">
             <p class="help-block error-text" ng-message="required">classexercise name is required.</p>
           </div>
         </div>
-            <div  style="margin-bottom: 5px;">
+            <div class="row" style="margin-bottom: 5px;">
                 <label class="col-md-2"> Date Of Exercise</label>
                 <div class="col-md-4">
                     <p class="input-group">
@@ -57,19 +58,22 @@
             <button type="button" class="btn btn-default" ng-click="$event.preventDefault(); $event.stopPropagation();vm.openDateofregisterPopup();"><i class="glyphicon glyphicon-calendar"></i></button>
           </span></p>
                 </div>
+        </div>
                 
-             <div class="row">
+             <div class="row" style="margin-bottom: 5px;">
         
-            <label class="control-label" for="name">Total Mark</label>
+            <label class="control-label col-md-2" for="name">Total Mark</label>
+                 <div class="col-md-4">
           <input name="name" type="text" ng-model="vm.classexercise.totalmark" id="totalmark" class="form-control" placeholder="Name" required>
           <div ng-messages="vm.form.classexerciseForm.totalmark.$error" role="alert">
             <p class="help-block error-text" ng-message="required">classexercise totalmark is required.</p>
           </div>
+                     </div>
                 </div>
                 
-            <div style="paddin-bottom: 10px;" class="col-md-6">
+            <div class="row" style="paddin-bottom: 10px;" >
 
-
+<div class="col-md-12">
                 <table class="table table-bordered table-hover table-condensed">
                     <tr style="font-weight: bold">
                         <td>Student</td>
@@ -94,14 +98,14 @@
                     </tr>
                 </table>
 
-
+    </div>
 
 
             </div>
-                </div>
+               <!-- </div>-->
         
     </div>
-</div>
+
 
 <div class="modal-footer">
 

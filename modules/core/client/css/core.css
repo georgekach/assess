@@ -72,6 +72,7 @@ a:hover .header-profile-image {
     padding-bottom: 10px;
     padding-left: 20px;
     padding-right: 15px;
+    /*background-color: red;*/
 }
 
 .profile-image {
@@ -142,7 +143,30 @@ a:hover .header-profile-image {
     
 }
 
+.margin-bottom {
+    margin-bottom:15px;
+}
 
+.bodice {
+    display: table;
+    /*background-color: green;*/
+    width: 100%;
+}
+
+.left-side {
+    /*background-color: blue;*/
+    float: none;
+    display: table-cell;
+   /* border: 1px solid;*/
+}
+
+.right-side {
+    /*background-color: red;*/
+    float: none;
+    display: table-cell;
+    border-left: 1px solid #ff0000;
+    /*border: 1px solid;*/
+}
 /*
 .navbar-custom {
   background-color:#323f48;

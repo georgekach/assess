@@ -1,0 +1,73 @@
+<!--<section>
+  <div class="page-header">
+    <h1>{{vm.announcement._id ? 'Edit Announcement' : 'New Announcement'}}</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.announcementForm" class="form-horizontal" ng-submit="vm.save(vm.form.announcementForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="name">Name</label>
+          <input name="name" type="text" ng-model="vm.announcement.name" id="name" class="form-control" placeholder="Name" required>
+          <div ng-messages="vm.form.announcementForm.name.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Announcement name is required.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-default">{{vm.announcement._id ? 'Update' : 'Create'}}</button>
+        </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>-->
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title"> {{vm.announcement._id ? 'Update': 'New '}} Announcement Details</h3>
+</div>
+<div class="modal-body" id="modal-body">
+    <div class="row" style="margin-bottom: 5px;">
+        <div class="form-group">
+            <label class="control-label col-md-2" for="title">Title</label>
+            <div class="col-md-4">
+            <input name="title" type="text" ng-model="vm.announcement.title" id="title" class="form-control" placeholder="Name" required>
+                </div>
+            <div ng-messages="vm.form.announcementForm.title.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Announcement name is required.</p>
+            </div>
+        </div>
+
+    </div>
+    <div class="row" style="margin-bottom: 5px;">
+                <label class="col-md-2"> Date Publish Start</label>
+                <div class="col-md-4">
+                    <p class="input-group">
+                        <input class="form-control" type="text" ng-model="vm.announcement.publishstartdate" id="publishstartdate" placeholder="Start Date" datepicker-popup="{{vm.format}}" is-open="vm.publishStartDatePopup.opened" datepicker-options="vm.dateOptions" close-text="Close" ng-required="true" date-disabled="vm.disabled(date, mode)" min-date="vm.minDate" max-date="vm.maxDate" />
+                        <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="$event.preventDefault(); $event.stopPropagation();vm.openPublishStartDatePopup();"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span></p>
+                </div>
+        
+        <label class="col-md-2"> Date Publish End</label>
+                <div class="col-md-4">
+                    <p class="input-group">
+                        <input class="form-control" type="text" ng-model="vm.announcement.publishenddate" id="publishenddate" placeholder="publishstartdate" datepicker-popup="{{vm.format}}" is-open="vm.publishEndDatePopup.opened" datepicker-options="vm.dateOptions" close-text="Close" ng-required="true" date-disabled="vm.disabled(date, mode)" min-date="vm.minDate" max-date="vm.maxDate" />
+                        <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="$event.preventDefault(); $event.stopPropagation();vm.openPublishEndDatePopup();"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span></p>
+                </div>
+        </div>
+    <div class="row">
+        <!--<label> Content</label>-->
+        <text-angular class="col-md-12" ng-model="vm.announcement.content"></text-angular>
+
+    </div>
+
+
+</div>
+<div class="modal-footer">
+
+    <button class="btn btn-primary" type="button" ng-click="vm.save()">{{vm.announcement._id ? 'Update': 'Save'}}</button>
+    <!--<button class="btn btn-primary" type="button" ng-click="vm.ok()">OK</button>-->
+    <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancel</button>
+</div>
