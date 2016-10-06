@@ -21,6 +21,8 @@ module.exports = function(app) {
   app.route('/api/mediarecourcesforteacher/:mendiaresourceTeacherId').all(mediaresourcesPolicy.isAllowed)
   .get(mediaresources.mediaresourceByTeacherID);
 
+  app.route('/api/mresources/picture').post(mediaresources.changeMediaResourcePicture);
+    
   // Finish by binding the Mediaresource middleware
   app.param('mediaresourceId', mediaresources.mediaresourceByID);
   app.param('mendiaresourceTeacherId', mediaresources.mediaresourceByTeacherID);

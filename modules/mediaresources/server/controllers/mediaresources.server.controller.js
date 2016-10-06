@@ -6,6 +6,8 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Mediaresource = mongoose.model('Mediaresource'),
+  config = require(path.resolve('./config/config')),
+  multer = require('multer'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
@@ -134,4 +136,48 @@ exports.mediaresourceByTeacherID = function(req, res, next, id) {
       res.jsonp(mediaresources);
     }
   });
+};
+
+//upload resource as picture
+exports.changeMediaResourcePicture = function (req, res) {
+  var user = req.mediaresource;//req.user;
+    console.log(user);
+  var message = null;
+  var upload = multer(config.uploads.profileUpload).single('newMediaResource');
+  var resourcesUploadFileFilter = require(path.resolve('./config/lib/multer')).resourcesUploadFileFilter;
+  
+  // Filtering to upload only images
+  upload.fileFilter = resourcesUploadFileFilter;
+
+  if (user) {
+    upload(req, res, function (uploadError) {
+      if(uploadError) {
+        return res.status(400).send({
+          message: 'Error occurred while uploading profile picture'
+        });
+      } else {
+        user.attachment = config.uploads.mediaResourcesUpload.dest + req.file.filename;
+
+        user.save(function (saveError) {
+          if (saveError) {
+            return res.status(400).send({
+              message: errorHandler.getErrorMessage(saveError)
+            });
+          } else {
+            req.login(user, function (err) {
+              if (err) {
+                res.status(400).send(err);
+              } else {
+                res.json(user);
+              }
+            });
+          }
+        });
+      }
+    });
+  } else {
+    res.status(400).send({
+      message: 'User is not signed in'
+    });
+  }
 };
