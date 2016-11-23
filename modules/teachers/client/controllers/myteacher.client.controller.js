@@ -46,6 +46,8 @@
       schoolClassesPromise.then(function(data){
           vm.schoolClasses = filterFilter(data,{school: vm.teacher.school});
           
+          var result = _.where(vm.schoolClasses,{teacher: vm.teacher._id});
+          console.log(result);
           //vm.userSelectedClass = vm.schoolClasses[0];
       }, function(err){
           
@@ -70,11 +72,11 @@
       vm.refreshTeachersMediaResources();
       
       function refreshClassRegisters(){
-          var classClassRegistersPromise = RegistersForClassService.query({registerclassId: vm.selectedClass._id}).$promise;
+          var classClassRegistersPromise = ClassregistersService.query().$promise;
           
           classClassRegistersPromise.then(function(data){
               console.log(data);
-             vm.selectedClassesRegisters = data; 
+             vm.selectedClassesRegisters = filterFilter(data,{schoolclass: vm.selectedClass._id}); 
           }, function(error){
               
           });
@@ -106,11 +108,11 @@
       }
       
       function refreshTeachersMediaResources(){
-          var teachersMediaResourcesPromise = MediaResourcesForTeacherService.query({mendiaresourceTeacherId:vm.authentication.user.teacher}).$promise;
+          var teachersMediaResourcesPromise = MediaresourcesService.query().$promise;
           
           teachersMediaResourcesPromise.then(function(data){
-              
-              vm.teachersResources = data;
+               //var resultsArray = data;
+              vm.teachersResources = filterFilter(data,{teacher:vm.authentication.user.teacher});
               
           }, function(error){
               
@@ -253,7 +255,7 @@
         },*/
           
           announcementResolve: function(){
-              return announcement;//vm.announcement;
+              return vm.announcement;//vm.announcement;
           }
       }
     });
@@ -274,7 +276,7 @@
                 vm.school.$update();*/
             }
         else{
-             //vm.teacher.$update();
+             vm.announcement.$update();
         }
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());
@@ -283,6 +285,18 @@
       
       //openMediaResourceModal
             vm.openMediaResourceModal = function (size,mediaresource) {
+                
+               /* var xm = MediaresourcesService.get({mediaresourceId: mediaresource._id}).$promise;
+                
+                var modifiedmediaresource ='';
+                
+                xm.then(function (data){
+                    modifiedmediaresource = data;
+                },function(error){
+                    
+                });*/
+                
+                
     var modalInstance = $modal.open({
       animation: vm.animationsEnabled,
       ariaLabelledBy: 'modal-title',
@@ -297,17 +311,17 @@
         },*/
           
           mediaresourceResolve: function(){
-              return mediaresource;//vm.announcement;
+              return vm.mediaresource;//vm.announcement;
           }
       }
     });
 
     modalInstance.result.then(function (selectedItem) {
-      vm.mediaResource = selectedItem;
+      //vm.mediaResource = selectedItem;
         if(!(selectedItem._id))
             {
              
-                vm.mediaResource.$save(function(res){
+                vm.mediaresource.$save(function(res){
                     vm.refreshTeachersMediaResources();
                 },function(res){
                     vm.error = res.data.message;
@@ -318,7 +332,11 @@
                 vm.school.$update();*/
             }
         else{
-             //vm.teacher.$update();
+              vm.mediaresource.$update(function(res){
+                
+            },function(res){
+                vm.error = res.data.message;
+            });
         }
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());

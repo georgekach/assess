@@ -13,6 +13,7 @@
 
     vm.authentication = Authentication;
     vm.mediaresource = mediaresource;
+    //$scope.mediaresource = mediaresource;
     vm.error = null;
     vm.form = {};
     vm.remove = remove;
@@ -85,8 +86,12 @@
 
         fileReader.onload = function (fileReaderEvent) {
           $timeout(function () {
-            vm.imageURL = fileReaderEvent.target.result;
+              
+              vm.mediaresource.attachment = fileReaderEvent.target.result;
+              
           }, 0);
+            /*vm.imageURL = fileReaderEvent.target.result;
+          }, 0);*/
         };
       }
     };
@@ -97,7 +102,9 @@
       vm.success = true;
 
       // Populate user object
-      vm.user = Authentication.user = response;
+      //vm.user = Authentication.user = response;
+        vm.mediaresource.attachment = response.destination+ response.filename;
+        console.log(response);
 
       // Clear upload buttons
       vm.cancelUpload();
@@ -110,6 +117,7 @@
 
       // Show error message
       vm.error = response.message;
+        console.log('error'+ vm.error);
     };
 
     // Change user profile picture

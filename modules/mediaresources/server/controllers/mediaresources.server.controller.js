@@ -140,10 +140,13 @@ exports.mediaresourceByTeacherID = function(req, res, next, id) {
 
 //upload resource as picture
 exports.changeMediaResourcePicture = function (req, res) {
-  var user = req.mediaresource;//req.user;
-    console.log(user);
+    
+    var da = req.mediaresource;
+ 
+  var user = req.user;
+    
   var message = null;
-  var upload = multer(config.uploads.profileUpload).single('newMediaResource');
+  var upload = multer(config.uploads.mediaResourcesUpload).single('newMediaResource');
   var resourcesUploadFileFilter = require(path.resolve('./config/lib/multer')).resourcesUploadFileFilter;
   
   // Filtering to upload only images
@@ -153,12 +156,18 @@ exports.changeMediaResourcePicture = function (req, res) {
     upload(req, res, function (uploadError) {
       if(uploadError) {
         return res.status(400).send({
-          message: 'Error occurred while uploading profile picture'
+          message: 'Error occurred while uploading profile picture '+ uploadError
         });
       } else {
         user.attachment = config.uploads.mediaResourcesUpload.dest + req.file.filename;
 
-        user.save(function (saveError) {
+          
+          
+          console.log('****'+config.uploads.mediaResourcesUpload.dest + req.file.filename);
+          
+          res.json(req.file);
+          
+        /*user.save(function (saveError) {
           if (saveError) {
             return res.status(400).send({
               message: errorHandler.getErrorMessage(saveError)
@@ -172,7 +181,7 @@ exports.changeMediaResourcePicture = function (req, res) {
               }
             });
           }
-        });
+        });*/
       }
     });
   } else {
