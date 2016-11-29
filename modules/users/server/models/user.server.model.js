@@ -62,15 +62,15 @@ var UserSchema = new Schema({
   },
     school:{
         type: Schema.ObjectId,
-        ref:"Schools"
+        ref:"School"
     },
         teacher:{
         type: Schema.ObjectId,
-        ref:"Schools.teachers"
+        ref:"Teacher"
     },
     guardian :{
       type: Schema.ObjectId,
-      ref: "Guardians"
+      ref: "Guardian"
     },
   username: {
     type: String,

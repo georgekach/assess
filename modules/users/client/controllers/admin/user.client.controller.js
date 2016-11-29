@@ -1,11 +1,29 @@
 'use strict';
 
-angular.module('users.admin').controller('UserController', ['$scope', '$state', 'Authentication', 'userResolve','SchoolsService',
-  function ($scope, $state, Authentication, userResolve,SchoolsService) {
+angular.module('users.admin').controller('UserController', ['$scope', '$state', 'Authentication', 'userResolve','SchoolsService','TeachersService','filterFilter','GuardiansService',
+  function ($scope, $state, Authentication, userResolve,SchoolsService,TeachersService,filterFilter,GuardiansService) {
     $scope.authentication = Authentication;
     $scope.user = userResolve;
       $scope.schools= SchoolsService.query();
-
+      var schoolsteachersPromise = TeachersService.query().$promise;
+      
+      schoolsteachersPromise.then(function(results){
+         var schoolsteachers = results; 
+          
+          if($scope.user.school)
+          {
+              console.log('im here');
+             $scope.teachers = filterFilter( results,{school: $scope.user.school});
+          }
+      });
+      
+      // fill up the guardians
+     var guardiansPromise = GuardiansService.query().$promise;
+      guardiansPromise.then(function(results){
+         $scope.guardians = results; 
+      });
+    
+      
     $scope.remove = function (user) {
       if (confirm('Are you sure you want to delete this user?')) {
         if (user) {

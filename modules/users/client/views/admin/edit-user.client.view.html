@@ -19,6 +19,13 @@
             <p class="help-block error-text" ng-message="required">Last name is required.</p>
           </div>
         </div>
+          <div class="form-group" show-errors>
+          <label for="cellnumber">Cell Number</label>
+          <input type="text" id="cellnumber" name="cellnumber" class="form-control" ng-model="user.cellnumber" placeholder="cellnumber" lowercase required>
+          <div ng-messages="userForm.cellnumber.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Cell Number is required.</p>
+          </div>
+        </div>
         <div class="form-group" show-errors>
           <label class="control-label" for="roles">Roles</label>
           <div class="controls">
@@ -29,15 +36,33 @@
           </div>
         </div>
           <div class="form-group" show-errors>
-          <label for="cellnumber">School</label>
+          <label for="school">School</label>
           <!--<input type="text" id="school" name="school" class="form-control" ng-model="user.school" placeholder="school" lowercase required>-->
-              <select class="form-control" id="school" ng-model="user.school" ng-options="school._id as school.name for school in schools"  ></select>
+              <select class="form-control" id="school" name="school" ng-model="user.school" ng-options="school._id as school.name for school in schools"  ></select>
               
           <div ng-messages="userForm.school.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">school Number is required.</p>
+            
           </div>
         </div>
           
+          <div class="form-group" show-errors>
+          <label for="teacher">Teacher</label>
+          <!--<input type="text" id="school" name="school" class="form-control" ng-model="user.school" placeholder="school" lowercase required>-->
+              <select class="form-control" id="teacher" name="teacher" ng-model="user.teacher" ng-options="teacher._id as teacher.name for teacher in teachers"  ></select>
+              
+          <div ng-messages="userForm.school.$error" role="alert">
+            
+          </div>
+        </div>
+           <div class="form-group" show-errors>
+          <label for="guardian">Guardian</label>
+          <!--<input type="text" id="school" name="school" class="form-control" ng-model="user.school" placeholder="school" lowercase required>-->
+              <select class="form-control" name="guardian" id="guardian" ng-model="user.guardian" ng-options="guardian._id as guardian.name for guardian in guardians"  ></select>
+              
+          <div ng-messages="userForm.school.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Teacher att is required.</p>
+          </div>
+        </div>
         <div class="form-group">
           <input type="submit" value="Update" class="btn btn-default">
         </div>

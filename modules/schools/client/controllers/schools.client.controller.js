@@ -309,8 +309,8 @@
         /*items: function () {
           return vm.items;
         },*/
-          school: function(){
-              return vm.school;
+          schoolclasses: function(){
+              return vm.schoolClasses;
           },
           /*student: function(){
               

@@ -6,9 +6,9 @@
     .module('students')
     .controller('StudentsController', StudentsController);
 
-  StudentsController.$inject = ['$scope', '$state', 'Authentication', 'studentResolve','$modalInstance'];
+  StudentsController.$inject = ['$scope', '$state', 'Authentication', 'studentResolve','$modalInstance','schoolclasses'];
 
-  function StudentsController ($scope, $state, Authentication, student,$modalInstance) {
+  function StudentsController ($scope, $state, Authentication, student,$modalInstance,schoolclasses) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -17,6 +17,7 @@
     vm.form = {};
     vm.remove = remove;
     //vm.save = save;
+      vm.schoolclasses = schoolclasses;
 
     // Remove existing Student
     function remove() {
