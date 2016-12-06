@@ -3,7 +3,7 @@
     <h1 data-ng-bind="vm.school.name"></h1>
   </div>
   <div class="pull-right"
-       data-ng-show="vm.school.isCurrentUserOwner">
+       > <!--data-ng-show="vm.school.isCurrentUserOwner"-->
     <a class="btn btn-primary"
        data-ui-sref="schools.edit({ schoolId: vm.school._id })">
       <i class="glyphicon glyphicon-edit"></i>
