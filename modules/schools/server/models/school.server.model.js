@@ -21,6 +21,11 @@ var SchoolSchema = new Schema({
     default: '',
     required: 'Please fill School Address',
     trim: true
+  },    
+  schooltype: {
+    type: String, 
+    default: '',
+    trim: true
   },
   logo: {
     type: String,

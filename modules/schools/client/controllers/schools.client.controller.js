@@ -6,9 +6,9 @@
     .module('schools')
     .controller('SchoolsController', SchoolsController);
 
-  SchoolsController.$inject = ['$scope', '$state', 'Authentication', 'schoolResolve','SchoolclassesService','$modal','$log','StudentsService','filterFilter','TeachersService','SchooleventsService','SchoolsubjectsService'];
+  SchoolsController.$inject = ['$scope', '$state', 'Authentication', 'schoolResolve','SchoolclassesService','$modal','$log','StudentsService','filterFilter','TeachersService','SchooleventsService','SchoolsubjectsService','ApplicationcodegroupsService'];
 
-  function SchoolsController ($scope, $state, Authentication, school,SchoolclassesService,$modal,$log,StudentsService,filterFilter,TeachersService,SchooleventsService,SchoolsubjectsService) {
+  function SchoolsController ($scope, $state, Authentication, school,SchoolclassesService,$modal,$log,StudentsService,filterFilter,TeachersService,SchooleventsService,SchoolsubjectsService,ApplicationcodegroupsService) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -25,6 +25,19 @@
     vm.refreshSchoolClasses = refreshSchoolClasses;
     vm.refreshSchoolEvents = refreshSchoolEvents;
     vm.refreshSchoolSubjects = refreshSchoolSubjects;
+    
+      var applicationCodesPromise = ApplicationcodegroupsService.query().$promise;
+      
+      applicationCodesPromise.then(function(applicationCodegroups){
+          var res = applicationCodegroups;
+          
+          vm.schooltypeCodeGroup = filterFilter(applicationCodegroups,{groupcode:'schooltype'});
+          
+          if( vm.schooltypeCodeGroup.length >0){
+              vm.schoolTypes = vm.schooltypeCodeGroup[0].applicationcodes;
+          }
+          //console.log( vm.schoolTypes);
+      });
      
       function refreshStudentsList (){
           var schoolstudentsPromise = StudentsService.query().$promise;

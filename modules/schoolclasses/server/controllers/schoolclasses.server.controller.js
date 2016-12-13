@@ -134,3 +134,31 @@ console.log(id);
     next();*/
   });
 };
+
+
+exports.updateClassesTeacher = function (req, res, next, id){
+    var subjectId = req.query.subjectId;
+    var teacherId = req.query.teacherId;
+    
+    console.log('youve reached ...'+id);
+    console.log('subjectId = '+subjectId);
+    console.log('teacherId = '+teacherId);
+    
+    Schoolclass.findOneAndUpdate(
+            { "_id": id, "subjects._id": subjectId },
+            { 
+                "$set": {
+                    "subjects.$.teacher": teacherId
+                }
+            },
+            function(err,doc) {
+                
+                if (err) {
+                      return next(err);
+                    } else  {
+                      return  res.jsonp(doc);
+                    }
+                
+            }
+        );
+};

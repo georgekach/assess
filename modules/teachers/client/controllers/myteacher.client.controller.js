@@ -46,9 +46,9 @@
       schoolClassesPromise.then(function(data){
           vm.schoolClasses = filterFilter(data,{school: vm.teacher.school});
           
-          var result = _.where(vm.schoolClasses,{teacher: vm.teacher._id});
-          console.log(result);
-          //vm.userSelectedClass = vm.schoolClasses[0];
+          //var result = _.where(vm.schoolClasses,{teacher: vm.teacher._id});
+          //console.log(result);
+          ////vm.userSelectedClass = vm.schoolClasses[0];
       }, function(err){
           
       });

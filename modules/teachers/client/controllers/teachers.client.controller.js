@@ -45,9 +45,12 @@
       
       // adding a class to the teacher
       vm.addTeachersClass = function() {
-        vm.selectedClassSubject.teacher = vm.teacher.id;
+        vm.selectedClassSubject.teacher = vm.teacher._id;
           
           console.log(vm.selectedClassSubject);
+          
+          
+          
           
           vm.selectedClassSubject.$update(function(res){
               console.log('Saved teacher record.');

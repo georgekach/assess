@@ -57,6 +57,19 @@
         </div>
 
 
+            <div class="form-group" show-errors>
+          <label class="control-label" for="name">School Type</label>
+        <!--  <input name="schooltype" type="text" ng-model="vm.school.schooltype" id="schooltype" class="form-control" placeholder="schooltype" required>-->
+                
+                <select name="schooltype" class="form-control" id="schooltype" ng-model="vm.school.schooltype" ng-options=" option.codeid as option.codename for option in vm.schoolTypes" required>
+      <!--<option ng-repeat="option in vm.schoolTypes" value="{{option.codeid}}">{{option.codename}}</option>-->
+    </select>
+                
+          <div ng-messages="vm.form.schoolForm.schooltype.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">School Type is required.</p>
+          </div>
+        </div>
+            
 
 
         </div>
