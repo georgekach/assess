@@ -124,8 +124,10 @@ exports.teachersBySchoolID = function(req, res, next, id) {
       message: 'Teacher is invalid'
     });
   }
+    var schoolInQuestion = req.query.schoolId;
+    console.log('SchoolInQuestion -> '+schoolInQuestion);
 
-  Teacher.find({school:id}).populate('user', 'displayName').populate('classes').exec(function (err, teachers) {
+  Teacher.find({school:schoolInQuestion}).populate('user', 'displayName').populate('classes').exec(function (err, teachers) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

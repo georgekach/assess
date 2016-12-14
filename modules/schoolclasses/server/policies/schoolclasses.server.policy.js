@@ -36,7 +36,7 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/classesinschool/:schoolclassSchoolId',
       permissions: '*'
     }, {
-      resources: '/api/seteacherforclass/:sId',
+      resources: '/api/seteacherforclass',
       permissions: '*'
     }]
   }, {
@@ -51,7 +51,7 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/classesinschool/:schoolclassSchoolId',
       permissions: '*'
     }, {
-      resources: '/api/seteacherforclass/:sId',
+      resources: '/api/seteacherforclass',
       permissions: '*'
     }]
   }]);

@@ -6,9 +6,9 @@
     .module('teachers')
     .controller('TeachersController', TeachersController);
 
-  TeachersController.$inject = ['$scope', '$state', 'Authentication', 'teacherResolve','$modalInstance','ClassesInSchoolService','filterFilter','TeachersInSchoolService','$window','SchoolclassesService'];
+  TeachersController.$inject = ['$scope', '$state', 'Authentication', 'teacherResolve','$modalInstance','ClassesInSchoolService','filterFilter','TeachersInSchoolService','$window','SchoolclassesService','ClassTeacherService'];
 
-  function TeachersController ($scope, $state, Authentication, teacher,$modalInstance,ClassesInSchoolService,filterFilter,TeachersInSchoolService,$window,SchoolclassesService) {
+  function TeachersController ($scope, $state, Authentication, teacher,$modalInstance,ClassesInSchoolService,filterFilter,TeachersInSchoolService,$window,SchoolclassesService,ClassTeacherService) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -48,9 +48,11 @@
         vm.selectedClassSubject.teacher = vm.teacher._id;
           
           console.log(vm.selectedClassSubject);
+          var classteacherPromise = ClassTeacherService.update({subjectId:vm.selectedClassSubject._id,teacherId:vm.teacher._id,classId:vm.selectedclass._id}).$promise;
           
-          
-          
+          classteacherPromise.then(function(data){
+             console.log('done creating class teacher'); 
+          });
           
           vm.selectedClassSubject.$update(function(res){
               console.log('Saved teacher record.');

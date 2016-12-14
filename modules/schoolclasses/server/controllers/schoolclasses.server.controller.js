@@ -136,16 +136,18 @@ console.log(id);
 };
 
 
-exports.updateClassesTeacher = function (req, res, next, id){
+exports.updateClassesTeacher = function (req, res, next){
     var subjectId = req.query.subjectId;
     var teacherId = req.query.teacherId;
+    var classId = req.query.classId;
     
-    console.log('youve reached ...'+id);
+    //console.log('youve reached ...'+id);
     console.log('subjectId = '+subjectId);
     console.log('teacherId = '+teacherId);
+    console.log('classId = '+classId);
     
     Schoolclass.findOneAndUpdate(
-            { "_id": id, "subjects._id": subjectId },
+            { "_id": classId, "subjects._id": subjectId },
             { 
                 "$set": {
                     "subjects.$.teacher": teacherId
