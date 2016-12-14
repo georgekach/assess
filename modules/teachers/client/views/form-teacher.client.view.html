@@ -75,7 +75,9 @@
                         <div role="presentation" class="tab-pane" id="teacherClasses">
                             
                            
-                            <div class="row">
+                            
+                                
+                            <div class="row" style="padding-top: 10px">
                             <label class="col-md-1">Class</label>
                             <div class="col-md-2">
                                 <!--<input class="form-control" type="text" ng-model="vm.student.class" id="picture" placeholder="picture" />-->
@@ -98,9 +100,11 @@
                                 </div>
                                 
                             </div>
-                            <div class="row">
+                           
+                            
+                            <div class="row" style="padding-top: 10px">
                                 <div class="col-md-3">
-                                        <ul>
+                                        <ul class="nav nav-pills nav-stacked">
                                             <li ng-repeat="class in vm.schoolClasses |teachersClassesFilter: vm.teacher" >
                                                 
                                                 <a href="#" ng-click="vm.userSelectedClass=class;">{{class.name}}</a>
@@ -109,7 +113,9 @@
                                                 </li>
                                         </ul>
                                     </div>
-                                <div class="col-md-4">
+                                
+                                
+                                <div class="col-md-4" >
                                 
                                   
                                 <table class="table table-bordered table-hover table-condensed">

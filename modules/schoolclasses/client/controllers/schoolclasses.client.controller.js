@@ -6,9 +6,9 @@
     .module('schoolclasses')
     .controller('SchoolclassesController', SchoolclassesController);
 
-  SchoolclassesController.$inject = ['$scope', '$state', 'Authentication', 'schoolclassResolve','$modalInstance','ClassesInSchoolService','filterFilter','$filter','$window','SubjectsInSchoolService'];
+  SchoolclassesController.$inject = ['$scope', '$state', 'Authentication', 'schoolclassResolve','$modalInstance','ClassesInSchoolService','filterFilter','$filter','$window','SubjectsInSchoolService','TeachersService'];
 
-  function SchoolclassesController ($scope, $state, Authentication, schoolclass,$modalInstance,ClassesInSchoolService,filterFilter,$filter,$window,SubjectsInSchoolService) {
+  function SchoolclassesController ($scope, $state, Authentication, schoolclass,$modalInstance,ClassesInSchoolService,filterFilter,$filter,$window,SubjectsInSchoolService,TeachersService) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -26,6 +26,13 @@
       },function(err){
           
           
+      });
+      
+      
+      var teachersPromise = TeachersService.query().$promise;
+      
+      teachersPromise.then(function(data){
+          vm.schoolteachers = data;
       });
       
       var schoolsSubjectsPromise = SubjectsInSchoolService.query({subjectsSchoolId: schoolclass.school}).$promise;

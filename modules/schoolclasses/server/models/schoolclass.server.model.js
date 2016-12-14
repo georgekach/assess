@@ -43,6 +43,10 @@ var SchoolclassSchema = new Schema({
     ref: 'Schoolclass',
     trim: true
   },
+    classteacher:{
+      type: Schema.ObjectId,
+      ref:'Teacher' 
+  },
     school:{
       type: Schema.ObjectId,
       ref:'School'

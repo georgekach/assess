@@ -17,15 +17,7 @@
     vm.form = {};
     vm.remove = remove;
   
-      var schoolClassesPromise =  ClassesInSchoolService.query({schoolclassSchoolId: vm.teacher.school}).$promise;
       
-      schoolClassesPromise.then(function(data){
-          vm.schoolClasses = filterFilter(data,{school: vm.teacher.school});
-          
-          //vm.userSelectedClass = vm.schoolClasses[0];
-      }, function(err){
-          
-      });
       
       //vm.teachersClasses = filterFilter(vm.schoolClasses,{ :vm.teacher._id});
       
@@ -42,6 +34,21 @@
 
       vm.selectedclass = '';
       
+      var refreshSchoolClasses = function(){
+          
+                  var schoolClassesPromise =  ClassesInSchoolService.query({schoolclassSchoolId: vm.teacher.school}).$promise;
+
+              schoolClassesPromise.then(function(data){
+                  vm.schoolClasses = filterFilter(data,{school: vm.teacher.school});
+
+                  //vm.userSelectedClass = vm.schoolClasses[0];
+              }, function(err){
+
+              });
+          
+      };
+      
+      refreshSchoolClasses();
       
       // adding a class to the teacher
       vm.addTeachersClass = function() {
@@ -56,6 +63,9 @@
           
           vm.selectedClassSubject.$update(function(res){
               console.log('Saved teacher record.');
+              
+               refreshSchoolClasses();
+              
           },function(error){
               console.log(error.data.message);
           });//vm.teacher.classes.push(vm.selectedclass);
@@ -75,6 +85,9 @@
     $modalInstance.close(vm.teacher);
             
   };
+      
+      
+      
       
     // Remove existing Teacher
     function remove() {

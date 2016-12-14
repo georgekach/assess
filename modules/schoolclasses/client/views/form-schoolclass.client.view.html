@@ -82,6 +82,16 @@
                         <div class="col-md-4">
                             <input class="form-control" type="text" ng-model="vm.schoolclass.subject" id="subject" placeholder="Subject" /></div>
                     </div>
+                
+                    <div class="row" style="margin-bottom: 5px;">
+                        <label class="col-md-2">Class Teacher</label>
+                        <div class="col-md-4">
+                            <!--<input class="form-control" type="text" ng-model="vm.schoolclass.nextclass" id="nextclass" placeholder="Next Class" />-->
+                        <select class="form-control" id="classteacher" ng-model="vm.schoolclass.classteacher" ng-options=" teacher._id as teacher.name for teacher in vm.schoolteachers">
+                            </select> 
+                        </div>
+          </div>
+              
                     <div class="row" style="margin-bottom: 5px;">
                         <label class="col-md-2">Next Class</label>
                         <div class="col-md-4">
